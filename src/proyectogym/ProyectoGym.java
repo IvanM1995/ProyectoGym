@@ -4,6 +4,7 @@
  */
 package proyectogym;
 
+import AccesoDatos.ProyectoGym.Conexion;
 import java.sql.Connection;
 
 /**
