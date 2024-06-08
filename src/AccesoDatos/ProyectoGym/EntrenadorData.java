@@ -19,8 +19,7 @@ import javax.swing.JOptionPane;
  * @author Ivan
  */
 public class EntrenadorData {
-     
-     private Connection connection = null;
+ private Connection connection = null;
     
     public EntrenadorData(){
         connection = Conexion.getConexion();
@@ -78,9 +77,10 @@ public class EntrenadorData {
         }
         public List<Entrenador>listarEntrenadores(){  
 
-          ArrayList<Entrenador>entrenadores = new ArrayList<>();
+          
           String sql = "SELECT  id_entrenador, dni, nombre, apellido, especialidad, disponibilidad FROM entrenador WHERE estado = 1";       
-           try {
+           ArrayList<Entrenador>entrenadores = new ArrayList<>();
+          try {
 
                PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -110,12 +110,12 @@ public class EntrenadorData {
 
                        }
 
-           return entrenadores
+           return entrenadores;
                    
                    
                    
                    
-                   ;
+                  
 
        }
         
@@ -143,20 +143,23 @@ public class EntrenadorData {
         }
     }
       
-          public Entrenador buscarEntrenador(String especialidad){
-        Entrenador entre= null;
-       String sql = "SELECT id_entrenador, dni, nombre, apellido, especialidad, disponibilidad FROM entrenador WHERE especialidad = ? AND estado = 1";
-        PreparedStatement ps = null;
+          public List<Entrenador> buscarEntrenador(String especialidad){
+        
+        
+        String sql = "SELECT id_entrenador, dni, nombre, apellido, especialidad, disponibilidad FROM entrenador WHERE especialidad = ? AND estado = 1";
+         ArrayList<Entrenador>entrenadores = new ArrayList<>();
+         try {
 
-        try {
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, especialidad);
-            
-            ResultSet rs = ps.executeQuery();
-            
-            if(rs.next())
-                    {
-                        Entrenador entrenador = new Entrenador(); 
+               PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setString(1, especialidad);
+
+
+               ResultSet rs = ps.executeQuery();
+
+
+               while(rs.next())
+                       {
+                         Entrenador entrenador = new Entrenador(); 
                           entrenador.setId_entrenador(rs.getInt("id_entrenador"));
                           entrenador.setDni(rs.getString("dni"));
                           entrenador.setNombre(rs.getString("nombre"));
@@ -165,27 +168,24 @@ public class EntrenadorData {
                           entrenador.setDisponibilidad(rs.getString("disponibilidad"));
                           
                           
-                          entrenador.setEstado(true);
-                    
-                    }
-            else{
-                JOptionPane.showMessageDialog(null, "entrenador inexistente");
-                ps.close();
-            }
-            }  catch (SQLException ex)  
-                    {
-                     JOptionPane.showMessageDialog(null,"error al acceder a la tabla entrenador" + ex.getMessage());
-                    
-                    }
-        
-            
-                    return entre;
+                          entrenador.setEstado(true); 
+
+                          entrenadores.add(entrenador);
+                       }
+                           ps.close();
+               }  catch (SQLException ex)  
+                       {
+                        JOptionPane.showMessageDialog(null,"error al acceder a la tabla Entrenador" + ex.getMessage());
+
+                       }
+
+           return entrenadores;
                     
              }
          
           public Entrenador buscarEntrenadorxID(int id){
         Entrenador entrenador = null;
-       String sql = "SELECT *  FROM entrenador WHERE id_entrenador = ? AND estado = 1";
+        String sql = "SELECT *  FROM entrenador WHERE id_entrenador = ? AND estado = 1";
         PreparedStatement ps = null;
 
         try {
@@ -219,6 +219,176 @@ public class EntrenadorData {
         
             
                     return entrenador;
+                    
+             }
+     
+          
+          
+        
+       
+          public List<Entrenador> buscarEntrenadorxNombre(String nombre){
+        
+        
+        Entrenador entre= null;
+        String sql = "SELECT id_entrenador, dni, nombre, apellido, especialidad, disponibilidad FROM entrenador WHERE nombre = ? AND estado = 1";
+         ArrayList<Entrenador>entrenadores = new ArrayList<>();
+         try {
+
+               PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setString(1, nombre);
+
+
+               ResultSet rs = ps.executeQuery();
+
+
+               while(rs.next())
+                       {
+                         Entrenador entrenador = new Entrenador(); 
+                          entrenador.setId_entrenador(rs.getInt("id_entrenador"));
+                          entrenador.setDni(rs.getString("dni"));
+                          entrenador.setNombre(rs.getString("nombre"));
+                          entrenador.setApellido(rs.getString("apellido"));
+                          entrenador.setEspecialidad(rs.getString("especialidad"));
+                          entrenador.setDisponibilidad(rs.getString("disponibilidad"));
+                          
+                          
+                          entrenador.setEstado(true); 
+
+                          entrenadores.add(entrenador);
+                       }
+                           ps.close();
+               }  catch (SQLException ex)  
+                       {
+                        JOptionPane.showMessageDialog(null,"error al acceder a la tabla Entrenador" + ex.getMessage());
+
+                       }
+
+           return entrenadores;
+                    
+             }
+       
+       
+       public List<Entrenador> buscarEntrenadorxApellido(String apellido){
+        
+        
+        Entrenador entre= null;
+        String sql = "SELECT id_entrenador, dni, nombre, apellido, especialidad, disponibilidad FROM entrenador WHERE apellido = ? AND estado = 1";
+         ArrayList<Entrenador>entrenadores = new ArrayList<>();
+         try {
+
+               PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setString(1, apellido);
+
+
+               ResultSet rs = ps.executeQuery();
+
+
+               while(rs.next())
+                       {
+                         Entrenador entrenador = new Entrenador(); 
+                          entrenador.setId_entrenador(rs.getInt("id_entrenador"));
+                          entrenador.setDni(rs.getString("dni"));
+                          entrenador.setNombre(rs.getString("nombre"));
+                          entrenador.setApellido(rs.getString("apellido"));
+                          entrenador.setEspecialidad(rs.getString("especialidad"));
+                          entrenador.setDisponibilidad(rs.getString("disponibilidad"));
+                          
+                          
+                          entrenador.setEstado(true); 
+
+                          entrenadores.add(entrenador);
+                       }
+                           ps.close();
+               }  catch (SQLException ex)  
+                       {
+                        JOptionPane.showMessageDialog(null,"error al acceder a la tabla Entrenador" + ex.getMessage());
+
+                       }
+
+           return entrenadores;
+                    
+             }
+       
+         public List<Entrenador> buscarEntrenadorxDni(String dni){
+        
+        
+        Entrenador entre= null;
+        String sql = "SELECT id_entrenador, dni, nombre, apellido, especialidad, disponibilidad FROM entrenador WHERE dni = ? AND estado = 1";
+         ArrayList<Entrenador>entrenadores = new ArrayList<>();
+         try {
+
+               PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setString(1, dni);
+
+
+               ResultSet rs = ps.executeQuery();
+
+
+               while(rs.next())
+                       {
+                         Entrenador entrenador = new Entrenador(); 
+                          entrenador.setId_entrenador(rs.getInt("id_entrenador"));
+                          entrenador.setDni(rs.getString("dni"));
+                          entrenador.setNombre(rs.getString("nombre"));
+                          entrenador.setApellido(rs.getString("apellido"));
+                          entrenador.setEspecialidad(rs.getString("especialidad"));
+                          entrenador.setDisponibilidad(rs.getString("disponibilidad"));
+                          
+                          
+                          entrenador.setEstado(true); 
+
+                          entrenadores.add(entrenador);
+                       }
+                           ps.close();
+               }  catch (SQLException ex)  
+                       {
+                        JOptionPane.showMessageDialog(null,"error al acceder a la tabla Entrenador" + ex.getMessage());
+
+                       }
+
+           return entrenadores;
+                    
+             }
+       
+       
+         public List<Entrenador> buscarEntrenadorxDisponibilidad(String disponibilidad){
+        
+        
+        Entrenador entre= null;
+        String sql = "SELECT id_entrenador, dni, nombre, apellido, especialidad, disponibilidad FROM entrenador WHERE disponibilidad = ? AND estado = 1";
+         ArrayList<Entrenador>entrenadores = new ArrayList<>();
+         try {
+
+               PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setString(1, disponibilidad);
+
+
+               ResultSet rs = ps.executeQuery();
+
+
+               while(rs.next())
+                       {
+                         Entrenador entrenador = new Entrenador(); 
+                          entrenador.setId_entrenador(rs.getInt("id_entrenador"));
+                          entrenador.setDni(rs.getString("dni"));
+                          entrenador.setNombre(rs.getString("nombre"));
+                          entrenador.setApellido(rs.getString("apellido"));
+                          entrenador.setEspecialidad(rs.getString("especialidad"));
+                          entrenador.setDisponibilidad(rs.getString("disponibilidad"));
+                          
+                          
+                          entrenador.setEstado(true); 
+
+                          entrenadores.add(entrenador);
+                       }
+                           ps.close();
+               }  catch (SQLException ex)  
+                       {
+                        JOptionPane.showMessageDialog(null,"error al acceder a la tabla Entrenador" + ex.getMessage());
+
+                       }
+
+           return entrenadores;
                     
              }
      
