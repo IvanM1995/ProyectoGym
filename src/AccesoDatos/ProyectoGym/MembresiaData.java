@@ -29,15 +29,16 @@ public class MembresiaData {
 }
      public Boolean registrarMembresia (Membresia membresia){
     Boolean flag=false;
-        String sql = "INSERT INTO Membresia (id_socio, CantidadPases, fecha_inicio, fecha_fin, Costo, estado) VALUES (?, ?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-           ps.setInt(1, membresia.getId_socio().getId_socio());
-            ps.setInt(2, membresia.getCant_pases());
-            ps.setDate(3, membresia.getFecha_inicio());
-            ps.setDate(4, membresia.getFecha_fin());
-            ps.setBigDecimal(5, membresia.getCosto());
-            ps.setBoolean(6, membresia.isEstado()); 
+        String sql = "INSERT INTO `membresia`(`id_socio`, `tipo`, `fecha_inicio`, `fecha_fin`, `estado`, `Costo`, `CantidadPases`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, membresia.getId_socio().getId_socio());
+        ps.setString(2, membresia.getTipo());
+        ps.setDate(3, membresia.getFecha_inicio());
+        ps.setDate(4, membresia.getFecha_fin());
+        ps.setBoolean(5, membresia.isEstado());
+        ps.setBigDecimal(6, membresia.getCosto());
+        ps.setInt(7, membresia.getCant_pases());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()) {
@@ -105,7 +106,46 @@ public class MembresiaData {
     }
 }
     
-    //Crear un metodo para buscar una membresia a traves del Socio.
     
-    
+     public List<Membresia> obtenerTodasLasMembresias() {
+        List<Membresia> membresias = new ArrayList<>();
+        String sql = "SELECT * FROM Membresia";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                Membresia membresia = new Membresia();
+                membresia.setId_membresia(rs.getInt("id_membresia"));
+                membresia.getId_socio();
+                membresia.setCant_pases(rs.getInt("CantidadPases"));
+                membresia.setFecha_inicio(rs.getDate("fecha_inicio"));
+                membresia.setFecha_fin(rs.getDate("fecha_fin"));
+                membresia.setCosto(rs.getBigDecimal("Costo"));
+                membresia.setEstado(rs.getBoolean("estado"));
+                membresias.add(membresia);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return membresias;
+    }
+    public void actualizarMembresia(Membresia membresia) {
+        String sql = "UPDATE Membresia SET id_socio = ?, CantidadPases = ?, fecha_inicio = ?, fecha_fin = ?, Costo = ?, estado = ? WHERE id_membresia = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, membresia.getId_socio().getId_socio());
+            statement.setInt(2, membresia.getCant_pases());
+            statement.setDate(3, (membresia.getFecha_inicio()));
+            statement.setDate(4, (membresia.getFecha_fin()));
+            statement.setBigDecimal(5, membresia.getCosto());
+            statement.setBoolean(6, membresia.isEstado());
+            statement.setInt(7, membresia.getId_membresia());
+            statement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Actualizado con éxito.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar la membresía: " + e.getMessage());
+        }
+    }
 }
+
+    
+    
+

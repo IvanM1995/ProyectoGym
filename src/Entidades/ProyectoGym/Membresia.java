@@ -14,25 +14,28 @@ import java.sql.Date;
 public class Membresia {
      private int id_membresia;
     private Socio id_socio;
+    private String tipo;
     private int cant_pases;
     private Date fecha_inicio;
     private Date fecha_fin;
     private BigDecimal costo;
     private boolean estado;
+    
 
     public Membresia() {
     }
 
-    public Membresia(Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
+    public Membresia(Socio id_socio, String tipo, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
         this.id_socio = id_socio;
         this.cant_pases = cant_pases;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
         this.costo = costo;
         this.estado = estado;
+        this.tipo = tipo;
     }
 
-    public Membresia(int id_membresia, Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
+    public Membresia(int id_membresia, String tipo, Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
         this.id_membresia = id_membresia;
         this.id_socio = id_socio;
         this.cant_pases = cant_pases;
@@ -40,8 +43,17 @@ public class Membresia {
         this.fecha_fin = fecha_fin;
         this.costo = costo;
         this.estado = estado;
+         this.tipo = tipo;
     }
 
+    public String getTipo(){
+        return tipo;
+    }
+    
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+    
     public int getId_membresia() {
         return id_membresia;
     }
