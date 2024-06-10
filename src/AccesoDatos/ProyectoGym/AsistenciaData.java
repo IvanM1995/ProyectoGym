@@ -72,6 +72,7 @@ public class AsistenciaData {
 
     }
     public void buscarAsistenciaPorSocio(){
+        
     }
     public void buscarAsistenciaPorClase(){
     }
