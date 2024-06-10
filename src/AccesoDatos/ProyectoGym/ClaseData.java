@@ -145,13 +145,21 @@ public class ClaseData {
               
      }
     
-    public void inscribirSocioAunaClase(Socio insc, Clase cls){
+    public void inscribirSocioAunaClase(Socio insc , Clase cls){
+       
         
         String sql = "INSERT INTO clase (id_socio,id_clase) VALUES (?,?)";
+        
         try{
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, insc.getId_socio());
-            ps.setInt(2, cls.getId_clase());
+     
+            
+              
+           //socn.setId_socio(rs.getInt("id_socio"));
+           
+           ps.setInt(1,insc.getId_socio());
+            ps.setInt(2,cls.getId_clase());
+
            int exito = ps.executeUpdate();
             if(exito==1){
                 JOptionPane.showMessageDialog(null, "Socio añadido con exito");
@@ -160,6 +168,34 @@ public class ClaseData {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Error al acceder a la tabla clase");
         }
+    }
+    
+     
+    public Clase buscarClasePorId(int id){
+        Clase claseEncontrada = new Clase();
+        String sql = "SELECT * FROM clase WHERE id_clase LIKE ? AND estado = 1";
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+           ResultSet rs = ps.executeQuery();
+            
+           if(rs.next()){
+                
+               claseEncontrada.setId_clase(rs.getInt("id_clase"));
+               claseEncontrada.setNombre(rs.getString("nombre"));
+               claseEncontrada.setId_entrenador(ed.buscarEntrenadorxID(rs.getInt("id_entrenador")));
+               claseEncontrada.setHorario(rs.getTime("horario").toLocalTime());
+               claseEncontrada.setCapacidad(rs.getInt("capacidad"));
+               claseEncontrada.setEstado(true);
+               
+              
+           }
+           }catch(SQLException ex){
+                   JOptionPane.showMessageDialog(null,"Error al acceder a la tabla  " + ex.getMessage());
+                   }
+            return claseEncontrada ;
     }
     
 }

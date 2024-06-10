@@ -86,4 +86,11 @@ public class Clase {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return "Clase{" + "id_clase: " + id_clase + "; Nombre: " + nombre + "; id_entrenador: " + id_entrenador + "; Horario: " + horario + "; Capacidad: " + capacidad + "; Estado: " + estado + '}';
+    }
+
+    
 }
+

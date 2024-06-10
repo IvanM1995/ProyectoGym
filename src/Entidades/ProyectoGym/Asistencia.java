@@ -6,6 +6,8 @@ package Entidades.ProyectoGym;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
@@ -16,13 +18,13 @@ public class Asistencia {
     private Socio id_socio;
     private Clase id_clase;
     private Date fecha_asistencia;
-    private Time hora_asistencia;
+    private LocalTime hora_asistencia;
     private boolean estado;
 
     public Asistencia() {
     }
 
-    public Asistencia(Socio id_socio, Clase id_clase, Date fecha_asistencia, Time hora_asistencia, boolean estado) {
+    public Asistencia(Socio id_socio, Clase id_clase, Date fecha_asistencia, LocalTime hora_asistencia, boolean estado) {
         this.id_socio = id_socio;
         this.id_clase = id_clase;
         this.fecha_asistencia = fecha_asistencia;
@@ -30,7 +32,7 @@ public class Asistencia {
         this.estado = estado;
     }
 
-    public Asistencia(int id_asistencia, Socio id_socio, Clase id_clase, Date fecha_asistencia, Time hora_asistencia, boolean estado) {
+    public Asistencia(int id_asistencia, Socio id_socio, Clase id_clase, Date fecha_asistencia, LocalTime hora_asistencia, boolean estado) {
         this.id_asistencia = id_asistencia;
         this.id_socio = id_socio;
         this.id_clase = id_clase;
@@ -71,11 +73,11 @@ public class Asistencia {
         this.fecha_asistencia = fecha_asistencia;
     }
 
-    public Time getHora_asistencia() {
+    public LocalTime getHora_asistencia() {
         return hora_asistencia;
     }
 
-    public void setHora_asistencia(Time hora_asistencia) {
+    public void setHora_asistencia(LocalTime hora_asistencia) {
         this.hora_asistencia = hora_asistencia;
     }
 

@@ -235,7 +235,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Socio" package="gimnasio.Entidades" visibility="public" xPosition="1737.0" yPosition="294.0">
+    <Class name="Socio" package="gimnasio.Entidades" visibility="public" xPosition="1487.0" yPosition="285.0">
       <Fields>
         <Field name="id_socio" type="int" visibility="private"/>
         <Field name="dni" type="String" visibility="private"/>
@@ -313,13 +313,13 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <UseRelation source="gimnasio.Entidades.Membresia" target="gimnasio.Entidades.Socio" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="id_clase" source="gimnasio.Entidades.Asistencia" target="gimnasio.Entidades.Clase" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="id_socio" source="gimnasio.Entidades.Membresia" target="gimnasio.Entidades.Socio" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="gimnasio.Entidades.Clase" target="gimnasio.Entidades.Entrenador" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="id_entrenador" source="gimnasio.Entidades.Clase" target="gimnasio.Entidades.Entrenador" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="gimnasio.Entidades.Asistencia" target="gimnasio.Entidades.Socio" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="id_socio" source="gimnasio.Entidades.Asistencia" target="gimnasio.Entidades.Socio" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="gimnasio.Entidades.Membresia" target="gimnasio.Entidades.Socio" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="gimnasio.Entidades.Asistencia" target="gimnasio.Entidades.Clase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="id_clase" source="gimnasio.Entidades.Asistencia" target="gimnasio.Entidades.Clase" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="gimnasio.Entidades.Asistencia" target="gimnasio.Entidades.Socio" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="gimnasio.Entidades.Clase" target="gimnasio.Entidades.Entrenador" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="id_socio" source="gimnasio.Entidades.Asistencia" target="gimnasio.Entidades.Socio" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

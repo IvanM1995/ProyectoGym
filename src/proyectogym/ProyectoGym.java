@@ -4,10 +4,20 @@
  */
 package proyectogym;
 
+import AccesoDatos.ProyectoGym.AsistenciaData;
 import AccesoDatos.ProyectoGym.ClaseData;
 import AccesoDatos.ProyectoGym.Conexion;
+import AccesoDatos.ProyectoGym.EntrenadorData;
+import AccesoDatos.ProyectoGym.SocioData;
+import Entidades.ProyectoGym.Asistencia;
+import Entidades.ProyectoGym.Clase;
 import Entidades.ProyectoGym.Entrenador;
+import Entidades.ProyectoGym.Socio;
 import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +33,7 @@ public class ProyectoGym {
            Connection connection = Conexion.getConexion();
         
         
-       //      EntrenadorData ed = new EntrenadorData();
+             EntrenadorData ed = new EntrenadorData();
 //      Entrenador e = new Entrenador( "36746323" , "Josue","Molina","Musculacion","16:30",true);
 //      Entrenador f = new Entrenador( "34746323" , "Josue","Molina","BodyCombat","16:30",true);
 //       Entrenador g = new Entrenador( "33746323" , "Josue","Molina","Natacion","16:30",true);        
@@ -154,8 +164,8 @@ public class ProyectoGym {
 //         ed.guardarEntrenador(entrenadorNatac);
          //ed.guardarEntrenador(entrenadorMusc);
          //ed.guardarEntrenador(entrenadorBodyJump);
-        ClaseData nuevaClase = new ClaseData();
-////
+     
+      
 //     Clase musculacion = new Clase ("musculacion",nuevoEntrenador, LocalTime.of(16,30),15,true );
 //     Clase bodycombat = new Clase ("bodycombat",nuevoEntrenador, LocalTime.of(10,00),15,true );
 //     Clase natacion = new Clase ("natacion",nuevoEntrenador, LocalTime.of(15,45),15,true );
@@ -176,11 +186,10 @@ public class ProyectoGym {
 //          System.out.println(clase.getHorario());
 //          System.out.println(clase.getCapacidad());
 //          System.out.println("");
-//         
-         
-     }
+//     }
    
-//      for(Clase clase:nuevaClase.listarClases()){
+//      for(Clase clase: nuevaClase.listarClases()){
+//  {
 //         
 //          System.out.println(clase);
 //          System.out.println(clase.getNombre());
@@ -188,9 +197,28 @@ public class ProyectoGym {
 //          System.out.println(clase.getHorario());
 //          System.out.println(clase.getCapacidad());
 //          System.out.println("");
-////         
-//         
-//     }
+//      
+//        }             
+      //}
+ 
+
+       ClaseData cd = new ClaseData();
+       SocioData sd = new SocioData();
+       AsistenciaData ad = new AsistenciaData();
+       
+       Clase nuevaClase = cd.buscarClasePorId(1);
+       Socio nuevoSocio = sd.buscarSocioPorId(4);
+       Asistencia asistencia = new Asistencia(nuevoSocio, nuevaClase, Date.valueOf(LocalDate.now()), LocalTime.now(), true);
+       
+      ad.guardarAsistencia(asistencia);
+       
     }
+}
+
+      
+
+  
+
+    
     
 
