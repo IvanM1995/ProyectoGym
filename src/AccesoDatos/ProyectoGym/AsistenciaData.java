@@ -22,6 +22,9 @@ import javax.swing.JOptionPane;
  */
 public class AsistenciaData {
       private Connection conexion = null;
+      private MembresiaData mb = new MembresiaData();
+      private ClaseData cd = new ClaseData();
+      private EntrenadorData ed = new EntrenadorData();
       
      
     public AsistenciaData() {
@@ -74,7 +77,7 @@ public class AsistenciaData {
     public void buscarAsistenciaPorSocio(){
         
     }
-    public void buscarAsistenciaPorClase(){
+    public void buscarAsistenciaPorClaseyHorario(){
     }
     public void eliminarAsistencia(){
     }
