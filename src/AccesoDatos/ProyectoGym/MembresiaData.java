@@ -5,6 +5,7 @@
 package AccesoDatos.ProyectoGym;
 
 import Entidades.ProyectoGym.Membresia;
+import Entidades.ProyectoGym.Socio;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -32,7 +33,8 @@ public class MembresiaData {
         String sql = "INSERT INTO `membresia`(`id_socio`, `tipo`, `fecha_inicio`, `fecha_fin`, `estado`, `Costo`, `CantidadPases`) VALUES (?, ?, ?, ?, ?, ?, ?)";
     try {
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1, membresia.getId_socio().getId_socio());
+        int idSocio = membresia.getId_socio().getId_socio();
+        ps.setInt(1, idSocio);
         ps.setString(2, membresia.getTipo());
         ps.setDate(3, membresia.getFecha_inicio());
         ps.setDate(4, membresia.getFecha_fin());
@@ -66,7 +68,9 @@ public class MembresiaData {
         while (rs.next()) {
             Membresia membresia = new Membresia();
             membresia.setId_membresia(rs.getInt("id_membresia"));
-            membresia.getId_socio();
+             Socio socio = new Socio();
+            socio.setId_socio(idSocio);
+            membresia.setId_socio(socio);
             membresia.setCant_pases(rs.getInt("CantidadPases"));
             membresia.setFecha_inicio(rs.getDate("fecha_inicio"));
             membresia.setFecha_fin(rs.getDate("fecha_fin"));
@@ -106,6 +110,16 @@ public class MembresiaData {
     }
 }
     
+    public void eliminarMembresia(int idMembresia) {
+        String sql = "DELETE FROM Membresia WHERE id_membresia = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, idMembresia);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     
      public List<Membresia> obtenerTodasLasMembresias() {
         List<Membresia> membresias = new ArrayList<>();
@@ -115,7 +129,11 @@ public class MembresiaData {
             while (rs.next()) {
                 Membresia membresia = new Membresia();
                 membresia.setId_membresia(rs.getInt("id_membresia"));
-                membresia.getId_socio();
+                membresia.setTipo(rs.getString("tipo"));
+                  int idSocio = rs.getInt("id_socio");
+            Socio socio = new Socio();
+            socio.setId_socio(idSocio);
+            membresia.setId_socio(socio);
                 membresia.setCant_pases(rs.getInt("CantidadPases"));
                 membresia.setFecha_inicio(rs.getDate("fecha_inicio"));
                 membresia.setFecha_fin(rs.getDate("fecha_fin"));
