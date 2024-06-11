@@ -44,6 +44,16 @@ public class Socio {
         this.contador_asistencia = contador_asistencia;
         this.estado = estado;
     }
+    
+    public Socio(int id_socio, String dni, String nombre, String apellido, int edad, String correo, String telefono) {
+    this.id_socio = id_socio;
+    this.dni = dni;
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.edad = edad;
+    this.correo = correo;
+    this.telefono = telefono;
+}
 
     public int getId_socio() {
         return id_socio;

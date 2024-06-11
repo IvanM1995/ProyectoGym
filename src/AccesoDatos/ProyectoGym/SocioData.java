@@ -113,32 +113,32 @@ public class SocioData {
         return socios;
     }
     
-     public void modificarSocio(Socio socio){
-        PreparedStatement ps;
-        String sql = "UPDATE socio SET (dni, nombre, apellido, edad, correo, telefono, cont_asistencia) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?) WHERE id_socio = ?";
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, socio.getDni());
-            ps.setString(2, socio.getNombre());
-            ps.setString(3, socio.getApellido());
-            ps.setInt(4, socio.getEdad());
-            ps.setString(5, socio.getCorreo());
-            ps.setString(6, socio.getTelefono());
-            ps.setInt(7, socio.getContador_asistencia());
-            ps.setInt(8, socio.getId_socio());
-            int fila=ps.executeUpdate();
-            if(fila==1){
-                JOptionPane.showMessageDialog(null, "Exitoso"); 
-    
-            }else{
-                 JOptionPane.showMessageDialog(null, "Erro en actulizacion de datos del Socio: ");
-            }
-            ps.close();
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Actualización de datps fallida!\n ");    
+     public void modificarSocio(Socio socio) {
+    PreparedStatement ps;
+    String sql = "UPDATE socio SET dni = ?, nombre = ?, apellido = ?, edad = ?, correo = ?, telefono = ?, cont_asistencia = ? WHERE id_socio = ?";
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setString(1, socio.getDni());
+        ps.setString(2, socio.getNombre());
+        ps.setString(3, socio.getApellido());
+        ps.setInt(4, socio.getEdad());
+        ps.setString(5, socio.getCorreo());
+        ps.setString(6, socio.getTelefono());
+        ps.setInt(7, socio.getContador_asistencia());
+        ps.setInt(8, socio.getId_socio());
+        
+        int fila = ps.executeUpdate();
+        if (fila == 1) {
+            JOptionPane.showMessageDialog(null, "Datos del socio actualizados exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error en la actualización de datos del socio.");
         }
+        
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar los datos del socio: " + ex.getMessage());
     }
+}
      
     public void eliminarSocio(int id){ 
         SocioData socioABuscar = new SocioData();
