@@ -53,11 +53,11 @@ public class Menu extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 933, Short.MAX_VALUE)
+            .addGap(0, 984, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+            .addGap(0, 647, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Membresia");
@@ -103,6 +103,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.setText("Entrenador");
 
         jMenuItem5.setText("Gestion de Entrenadores");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem5);
 
         jMenuItem6.setText("Consultas");
@@ -147,10 +152,14 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       MembresiaVista vista = new MembresiaVista();
+         
+    jDesktopPane1.removeAll();
+    jDesktopPane1.repaint();    
+    MembresiaVista vista = new MembresiaVista();
     jDesktopPane1.add(vista);
     vista.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
       MembresiaConsultaVista consulta = new MembresiaConsultaVista();
@@ -169,6 +178,16 @@ public class Menu extends javax.swing.JFrame {
     jDesktopPane1.add(socioConsulta);
     socioConsulta.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        jDesktopPane1.removeAll();
+         jDesktopPane1.repaint();
+        
+        EntrenadorConsultas v = new EntrenadorConsultas();
+        jDesktopPane1.add(v);
+        v.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
 
     /**
      * @param args the command line arguments
