@@ -4,7 +4,7 @@
  */
 package Entidades.ProyectoGym;
 
-import java.time.LocalTime;
+import java.sql.Time;
 
 /**
  *
@@ -14,14 +14,14 @@ public class Clase {
      private int id_clase;
     private String nombre;
     private Entrenador id_entrenador;
-    private LocalTime horario;
+    private Time horario;
     private int capacidad;
     private boolean estado;
 
     public Clase() {
     }
 
-    public Clase(String nombre, Entrenador id_entrenador, LocalTime horario, int capacidad, boolean estado) {
+    public Clase(String nombre, Entrenador id_entrenador, Time horario, int capacidad, boolean estado) {
         this.nombre = nombre;
         this.id_entrenador = id_entrenador;
         this.horario = horario;
@@ -29,7 +29,7 @@ public class Clase {
         this.estado = estado;
     }
 
-    public Clase(int id_clase, String nombre, Entrenador id_entrenador, LocalTime horario, int capacidad, boolean estado) {
+    public Clase(int id_clase, String nombre, Entrenador id_entrenador, Time horario, int capacidad, boolean estado) {
         this.id_clase = id_clase;
         this.nombre = nombre;
         this.id_entrenador = id_entrenador;
@@ -62,11 +62,11 @@ public class Clase {
         this.id_entrenador = id_entrenador;
     }
 
-    public LocalTime getHorario() {
+    public Time getHorario() {
         return horario;
     }
 
-    public void setHorario(LocalTime horario) {
+    public void setHorario(Time horario) {
         this.horario = horario;
     }
 

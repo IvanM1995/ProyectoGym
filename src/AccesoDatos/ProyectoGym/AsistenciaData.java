@@ -11,9 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,19 +45,9 @@ public class AsistenciaData {
                     java.sql.PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                     
                     ps.setInt(1, asistencia.getId_socio().getId_socio());
-                    ps.setInt(2, asistencia.getId_clase().getId_clase());
-       
-                    LocalTime hora_asistencia = asistencia.getHora_asistencia();
+                    ps.setInt(2, asistencia.getId_clase().getId_clase());                 
                     ps.setDate(3, asistencia.getFecha_asistencia());
-                     
-                    
-                    
-                    if(hora_asistencia!=null){
-                        ps.setTime(4, Time.valueOf( hora_asistencia));
-                    }else{
-                        ps.setNull(4, java.sql.Types.TIME);        
-                    }
-                               
+                    ps.setTime(4, asistencia.getHora_asistencia());                              
                     ps.setBoolean(5, asistencia.isEstado());
                     ps.executeUpdate();
                     ResultSet rs = ps.getGeneratedKeys();
@@ -74,13 +64,89 @@ public class AsistenciaData {
             }
 
     }
+        //Listamos las asistencias activas
+    public List<Asistencia> listarAsistencia(){
+                List<Asistencia> asistencias;
+                String sql = "SELECT * FROM asistencia WHERE estado = ?";
+                String campo = "1";
+                asistencias = busquedasDeAsistencias(sql, campo);
+        return asistencias;    
+    }
+        
+    
+    public List<Asistencia>busquedasDeAsistencias(String sql, String campo){ 
+                PreparedStatement ps;
+                ResultSet rs;
+                List<Asistencia> asist = new ArrayList<>();
+            try {
+                ps = conexion.prepareStatement(sql);
+                ps.setString(1, campo);
+                rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Asistencia asistencia = new Asistencia();
+                SocioData socioData = new SocioData();
+                ClaseData claseData = new ClaseData();
+                asistencia.setId_asistencia(rs.getInt(1));
+                asistencia.setId_socio(socioData.buscarSocioPorId(rs.getInt("id_socio")));
+                asistencia.setId_clase(claseData.buscarClasePorId(rs.getInt("id_clase")));
+                asistencia.setFecha_asistencia(rs.getDate("fecha_asistencia"));
+                asistencia.setHora_asistencia(rs.getTime("hora_asistencia"));
+                asistencia.setEstado(rs.getBoolean("estado"));
+                asist.add(asistencia);
+            }
+                ps.close();
+            
+            }catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla: "+ex.getMessage()); 
+            }catch(NullPointerException e){
+                JOptionPane.showMessageDialog(null, "Error  "+e.getMessage()); 
+        }
+            return asist;
+    }
+    
     public void buscarAsistenciaPorSocio(){
         
     }
-    public void buscarAsistenciaPorClaseyHorario(){
+   
+    public void eliminarAsistencia(int id){
+        String sql = "UPDATE asistencia SET estado = 0 WHERE id_asistencia = ?";
+         
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            int exito=ps.executeUpdate();
+            if(exito==1){
+                
+                JOptionPane.showMessageDialog(null, "La clase se elimino con exito");
+            }
+            
+        } catch (SQLException ex) {
+            
+          JOptionPane.showMessageDialog(null, "Error al acceder a la tabla clase");
+           
+        }
+              
     }
-    public void eliminarAsistencia(){
+    //Metodo para obtener la capacidad de una clase por medio de su ID
+    public boolean CapacidadClase(int claseID) {
+    String sql = "SELECT COUNT(*) Asistencia AS asistencia, capacidad FROM asistencia JOIN Clase ON Asistencia.ID_Clase = Clase.ID_Clase WHERE Asistencia.ID_Clase = ?";
+    boolean capacidadDisponible = false;
+    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+        ps.setInt(1, claseID);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                int insc = rs.getInt("Inscritos");
+                int cap = rs.getInt("Capacidad");
+                capacidadDisponible = insc < cap;
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia");
     }
+    return capacidadDisponible;
+}
     
     
 }

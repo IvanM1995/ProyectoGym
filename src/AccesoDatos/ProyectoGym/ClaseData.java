@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -38,15 +37,11 @@ public class ClaseData {
         try{
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         System.out.println(clase.getNombre());
-         ps.setString(1, clase.getNombre());
+        ps.setString(1, clase.getNombre());
         ps.setInt(2, clase.getId_entrenador().getId_entrenador());
        
-        LocalTime horario = clase.getHorario();
-        if(horario!=null){
-           ps.setTime(3, Time.valueOf(horario));
-        }else{
-            ps.setNull(3, java.sql.Types.TIME);
-        }
+
+        ps.setTime(3, clase.getHorario());
         ps.setInt(4, clase.getCapacidad());
         ps.setBoolean(5, clase.isEstado());
         ps.executeUpdate();
@@ -78,7 +73,7 @@ public class ClaseData {
                clase.setId_clase(rs.getInt("id_clase"));
                clase.setNombre(rs.getString("nombre"));
                clase.setId_entrenador(ed.buscarEntrenadorxID(rs.getInt("id_entrenador")));
-               clase.setHorario(rs.getTime("horario").toLocalTime());
+               clase.setHorario(rs.getTime("horario"));
                clase.setCapacidad(rs.getInt("capacidad"));
                clase.setEstado(true);
                
@@ -88,6 +83,45 @@ public class ClaseData {
                    JOptionPane.showMessageDialog(null,"Error al acceder a la tabla  " + ex.getMessage());
                    }
             return nombreClases ;
+    }
+    
+    public List<Clase>listarClasesPorHorario(Time horario){
+        List<Clase> clases = new ArrayList<>();
+        
+        PreparedStatement ps = null;
+        String sql = "SELEC * FROM clase WHERE horario = ? AND campacidad > ?";
+        
+        try{
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            int i = 0;
+            
+            ps.setTime(1, horario);
+            ps.setInt(2, 0);
+            ps.setBoolean(3, true);
+            while(rs.next()){
+                Clase clase = new Clase();
+                clase.setId_clase(rs.getInt("id_clase"));
+                clase.setNombre(rs.getString("nombre"));
+                clase.setId_entrenador(ed.buscarEntrenadorxID(rs.getInt("id_entrenador")));
+                clase.setHorario(rs.getTime("horario"));
+                clase.setCapacidad(rs.getInt("capacidad"));
+                clase.setEstado(true);
+              
+               
+            }
+            if(i==0){
+                JOptionPane.showMessageDialog(null, "Horario de clases" + horario + "No se registran clases en ese horario");
+            }else{
+                System.out.println("Lista de Clases por horario: " + horario);
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla clase");
+        }
+        
+        return clases;
+        
     }
     
     
@@ -108,7 +142,7 @@ public class ClaseData {
                clase.setId_clase(rs.getInt("id_clase"));
                clase.setNombre(rs.getString("nombre"));
                clase.setId_entrenador(ed.buscarEntrenadorxID(rs.getInt("id_entrenador")));
-               clase.setHorario(rs.getTime("horario").toLocalTime());
+               clase.setHorario(rs.getTime("horario"));
                clase.setCapacidad(rs.getInt("capacidad"));
                clase.setEstado(true);
                
@@ -170,7 +204,7 @@ public class ClaseData {
         }
     }
     
-     
+     //METODOS EXTRAS POR EL MOMENTO
     public Clase buscarClasePorId(int id){
         Clase claseEncontrada = new Clase();
         String sql = "SELECT * FROM clase WHERE id_clase LIKE ? AND estado = 1";
@@ -186,7 +220,7 @@ public class ClaseData {
                claseEncontrada.setId_clase(rs.getInt("id_clase"));
                claseEncontrada.setNombre(rs.getString("nombre"));
                claseEncontrada.setId_entrenador(ed.buscarEntrenadorxID(rs.getInt("id_entrenador")));
-               claseEncontrada.setHorario(rs.getTime("horario").toLocalTime());
+               claseEncontrada.setHorario(rs.getTime("horario"));
                claseEncontrada.setCapacidad(rs.getInt("capacidad"));
                claseEncontrada.setEstado(true);
                
@@ -196,6 +230,32 @@ public class ClaseData {
                    JOptionPane.showMessageDialog(null,"Error al acceder a la tabla  " + ex.getMessage());
                    }
             return claseEncontrada ;
+    }
+    
+     public void modificarClase(Clase clase){
+        String sql = "UPDATE clase SET (nombre, id_entrenador, horario, capacidad, estado) "
+                + "VALUES (?, ?, ?, ?, ?) WHERE id_clase = ?";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, clase.getNombre());
+            ps.setInt(2, clase.getId_entrenador().getId_entrenador());
+            ps.setTime(3, clase.getHorario());
+            ps.setInt(4, clase.getCapacidad());
+            ps.setBoolean(5, clase.isEstado());
+            ps.setInt(6, clase.getId_clase());
+            int fila=ps.executeUpdate();
+            if(fila==1){
+                JOptionPane.showMessageDialog(null, "Clase ID: "+clase.getId_clase()+"\nNombre: "+clase.getNombre()+"\nDatos Actualizados existosamente"); 
+    
+            }else{
+                 JOptionPane.showMessageDialog(null, "Error en actualización de Clase: "+clase.getNombre());
+            }
+            ps.close();
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo modificar la clase " +" "+ " La Clase: "+clase.getNombre()+" No pudo ser modificada");    
+        }
     }
     
 }
