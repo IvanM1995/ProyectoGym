@@ -54,6 +54,7 @@ public class EntrenadorData {
         return flag;
     }
        
+       
         public void eliminarEntrenador(int id){
          
          String sql = "UPDATE entrenador SET estado = 0 WHERE 	id_entrenador = ?";
@@ -119,29 +120,31 @@ public class EntrenadorData {
 
        }
         
-         public void modificarEntrenador (Entrenador entrenador){
-        String sql = "UPDATE entrenador SET dni = ?, nombre = ?, apellido = ?, especialidad = ?,  disponibilidad = ? WHERE id_entrenador = ?";
-        PreparedStatement ps = null;
-        try{           
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, entrenador.getDni());
-            ps.setString(2, entrenador.getNombre());
-            ps.setString(3, entrenador.getApellido());
-            ps.setString(4, entrenador.getEspecialidad());
-            ps.setString(5, entrenador.getDisponibilidad());
-            ps.setInt(5, entrenador.getId_entrenador());
-            int exito = ps.executeUpdate();
-            
-            if(exito == 1){
-                JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
-            }else{
-                JOptionPane.showMessageDialog(null, "El Entrenador no existe");
-            }
-            
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de entrenador"+ ex.getMessage());
+         public void modificarEntrenador(Entrenador entrenador) {
+    String sql = "UPDATE entrenador SET dni = ?, nombre = ?, apellido = ?, especialidad = ?, disponibilidad = ?, estado = ? WHERE id_entrenador = ?";
+    PreparedStatement ps = null;
+    try {
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, entrenador.getDni());
+        ps.setString(2, entrenador.getNombre());
+        ps.setString(3, entrenador.getApellido());
+        ps.setString(4, entrenador.getEspecialidad());
+        ps.setString(5, entrenador.getDisponibilidad());
+        ps.setBoolean(6, entrenador.isEstado());
+        ps.setInt(7, entrenador.getId_entrenador());
+        
+        int exito = ps.executeUpdate();
+        
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "El Entrenador no existe");
         }
-    }
+        
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de entrenador: " + ex.getMessage());
+    } 
+}
       
           public List<Entrenador> buscarEntrenador(String especialidad){
         
