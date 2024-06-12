@@ -57,8 +57,8 @@ public class AsistenciaData {
                         System.out.println("La asistencia de: " + asistencia.getId_socio().getNombre()+ " a " + asistencia.getId_clase().getNombre() + " fue añadida con exito");
                         JOptionPane.showMessageDialog(null,"La asistencia de: " + asistencia.getId_socio().getNombre()+ " a " + asistencia.getId_clase().getNombre() + " fue añadida con exito");
                     }
-                ps.close();
-            }catch(SQLException ex){
+                    ps.close();
+            }   catch(SQLException ex){
                 JOptionPane.showMessageDialog(null,"Error al acceder a la columna asistencia" + ex.getMessage());
 
             }
@@ -122,7 +122,7 @@ public class AsistenciaData {
                 JOptionPane.showMessageDialog(null, "La clase se elimino con exito");
             }
             
-        } catch (SQLException ex) {
+            }catch (SQLException ex) {
             
           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla clase");
            
@@ -131,11 +131,11 @@ public class AsistenciaData {
     }
     //Metodo para obtener la capacidad de una clase por medio de su ID
     public boolean CapacidadClase(int claseID) {
-    String sql = "SELECT COUNT(*) Asistencia AS asistencia, capacidad FROM asistencia JOIN Clase ON Asistencia.ID_Clase = Clase.ID_Clase WHERE Asistencia.ID_Clase = ?";
-    boolean capacidadDisponible = false;
-    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-        ps.setInt(1, claseID);
-        try (ResultSet rs = ps.executeQuery()) {
+        String sql = "SELECT COUNT(*) Asistencia AS asistencia, capacidad FROM asistencia JOIN Clase ON Asistencia.ID_Clase = Clase.ID_Clase WHERE Asistencia.ID_Clase = ?";
+        boolean capacidadDisponible = false;
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+                ps.setInt(1, claseID);
+        try (   ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
                 int insc = rs.getInt("Inscritos");
                 int cap = rs.getInt("Capacidad");

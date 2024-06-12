@@ -4,6 +4,8 @@
  */
 package Vistas.ProyectoGym;
 
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author Ivan
@@ -23,7 +25,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        Menu = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -49,14 +51,14 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 984, Short.MAX_VALUE)
+        javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
+        Menu.setLayout(MenuLayout);
+        MenuLayout.setHorizontalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 559, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        MenuLayout.setVerticalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 647, Short.MAX_VALUE)
         );
 
@@ -121,6 +123,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu6.add(jMenuItem7);
 
         jMenuItem8.setText("Consultas");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem8);
 
         jMenuBar1.add(jMenu6);
@@ -141,11 +148,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(Menu, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(Menu, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -153,40 +160,45 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
          
-    jDesktopPane1.removeAll();
-    jDesktopPane1.repaint();    
+    Menu.removeAll();
+    Menu.repaint();    
     MembresiaVista vista = new MembresiaVista();
-    jDesktopPane1.add(vista);
+    Menu.add(vista);
     vista.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
       MembresiaConsultaVista consulta = new MembresiaConsultaVista();
-    jDesktopPane1.add(consulta);
+    Menu.add(consulta);
     consulta.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
        SocioVista socio = new SocioVista();
-    jDesktopPane1.add(socio);
+    Menu.add(socio);
     socio.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
        SocioConsultaVista socioConsulta = new SocioConsultaVista();
-    jDesktopPane1.add(socioConsulta);
+    Menu.add(socioConsulta);
     socioConsulta.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        jDesktopPane1.removeAll();
-         jDesktopPane1.repaint();
+        Menu.removeAll();
+         Menu.repaint();
         
         EntrenadorConsultas v = new EntrenadorConsultas();
-        jDesktopPane1.add(v);
+        Menu.add(v);
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        
+         mostrarPestaña(new ClasesConsultaForm());
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
 
     /**
@@ -225,7 +237,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane Menu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -246,4 +258,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
+ private void mostrarPestaña(JInternalFrame x) {
+        Menu.removeAll();
+       Menu.repaint();
+        JInternalFrame lpr;        
+        x.setVisible(true);
+        Menu.add(x);
+    }
+    
+    
 }

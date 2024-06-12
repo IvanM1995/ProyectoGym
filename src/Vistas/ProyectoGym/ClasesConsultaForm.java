@@ -8,7 +8,10 @@ import AccesoDatos.ProyectoGym.ClaseData;
 import AccesoDatos.ProyectoGym.EntrenadorData;
 import AccesoDatos.ProyectoGym.SocioData;
 import Entidades.ProyectoGym.Clase;
+import Entidades.ProyectoGym.Entrenador;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +30,11 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
     private ClaseData claseD = new ClaseData();
     public ClasesConsultaForm() {
         initComponents();
+        modelo = new DefaultTableModel();
+        llenarTabla();
+        armarCabeceraTabla();
+       
+        
     }
 
     /**
@@ -49,7 +57,7 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
         jtTablaGYM = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setText("Listas de Clases");
@@ -75,25 +83,36 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
 
         jtTablaGYM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID Clase", "Nombre", "ID Entrenador", "Horario", "Estado"
+                "ID Clase", "Nombre", "ID Entrenador", "Horario", "Estado", "Capacidad"
             }
         ));
         jScrollPane1.setViewportView(jtTablaGYM);
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jbModificar.setText("Modificar");
-
-        jButton1.setText("Eliminar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbModificar.setEnabled(false);
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbModificarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
             }
         });
 
@@ -102,29 +121,24 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(jtEntrenadorID))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(30, 30, 30)
+                        .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtNombre)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 132, Short.MAX_VALUE)))))
                 .addGap(215, 215, 215))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 171, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addComponent(jButton1)
+                .addComponent(jbEliminar)
                 .addGap(178, 178, 178)
                 .addComponent(jbModificar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -132,7 +146,9 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
                 .addGap(29, 29, 29))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
@@ -150,12 +166,12 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtEntrenadorID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
-                    .addComponent(jButton1)
+                    .addComponent(jbEliminar)
                     .addComponent(jbModificar))
                 .addGap(21, 21, 21))
         );
@@ -163,37 +179,65 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        int fila = jtTablaGYM.getSelectedRow();
+         if(fila == -1){
+            JOptionPane.showMessageDialog(this,"Seleccione una fila para eliminar de la tabla");
+        }    
+         int idClase = (int) jtTablaGYM.getValueAt(fila, 0);
+         claseD.eliminarClase(idClase);
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        try{
-            int idEntrenador = Integer.parseInt(jtEntrenadorID.getText();
-            nuevaClase = claseD.listarClasesPorNombre(idEntrenador;
-            if(claseNueva != null){
-                jtEntrenadorID.set
-            }
-            
-            
-        }catch(NumberFormatException ex){
+      try {
+            String nombre = jtNombre.getText();
+            int idEntrenador = jtEntrenadorID.getText().isEmpty() ? -1 : Integer.parseInt(jtEntrenadorID.getText());
+            List<Clase> clases;
+
+        if (!nombre.isEmpty()) {
+             clases = claseD.listarClasesPorNombre(nombre);
+           }else if (idEntrenador != -1) {
+             Entrenador entrenador = ed.buscarEntrenadorxID(idEntrenador);
+            if (entrenador != null) {
+             clases = claseD.listarClasesPorEntrenador(entrenador);
+           }else {
+             JOptionPane.showMessageDialog(this, "Entrenador no encontrado con ID: " + idEntrenador);
+           return;
+                    }
+          }else {
+              clases = claseD.listarClases();
+                }  
+                 limpiarTabla();
+           for(Clase clase:clases){
+              modelo.addRow(new Object[]{clase.getId_clase(),clase.getNombre(),clase.getId_entrenador().getId_entrenador(),clase.getHorario(),clase.getCapacidad(),clase.isEstado()});
+              }
+           }catch(NumberFormatException ex){
             
         }
+         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jtEntrenadorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEntrenadorIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtEntrenadorIDActionPerformed
 
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+       
+    }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtEntrenadorID;
@@ -208,7 +252,9 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
         filaCabecera.add(" Nombre:");
         filaCabecera.add(" ID Entrenador: ");
         filaCabecera.add("Horario:");
-        filaCabecera.add("Estado:");
+        filaCabecera.add("capacidad");
+        filaCabecera.add("Estado");
+        
                 
         for (Object it : filaCabecera) {
 
@@ -222,5 +268,14 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = (DefaultTableModel) jtTablaGYM.getModel();
         modelo.setRowCount(0);
     }
+      
+      private void llenarTabla() {
+        
+          List<Clase>clases = claseD.listarClases();
+          for(Clase clase:clases){
+              modelo.addRow(new Object[]{clase.getId_clase(),clase.getNombre(),clase.getId_entrenador().getId_entrenador(),clase.getHorario(),clase.getCapacidad(),clase.isEstado()});
+          }
+              
+        }
    }
 

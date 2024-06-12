@@ -85,6 +85,35 @@ public class ClaseData {
             return nombreClases ;
     }
     
+    public List<Clase> listarClasesPorEntrenador(Entrenador entrenador) {
+    List<Clase> clases = new ArrayList<>();
+    String sql = "SELECT * FROM clase WHERE id_entrenador = ? AND estado = 1";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, entrenador.getId_entrenador());
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Clase clase = new Clase();
+            clase.setId_clase(rs.getInt("id_clase"));
+            clase.setNombre(rs.getString("nombre"));
+            clase.setId_entrenador(entrenador); 
+            clase.setHorario(rs.getTime("horario"));
+            clase.setCapacidad(rs.getInt("capacidad"));
+            clase.setEstado(true);
+            clases.add(clase);
+        }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla clase");
+    }
+
+    return clases;
+}
+    
+    
+    
     public List<Clase>listarClasesPorHorario(Time horario){
         List<Clase> clases = new ArrayList<>();
         
