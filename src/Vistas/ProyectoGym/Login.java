@@ -4,6 +4,8 @@
  */
 package Vistas.ProyectoGym;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ivan
@@ -26,21 +28,67 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jbInicioSesion = new javax.swing.JButton();
+        jtUsuario = new javax.swing.JTextField();
+        jtContra = new javax.swing.JTextField();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel2.setText("Gestion de Gimnasio Acceso");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setText("Usuario :");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setText("Contraseña :");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, -1));
+
+        jbInicioSesion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jbInicioSesion.setText("Iniciar Sesion");
+        jbInicioSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbInicioSesionMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, -1, 50));
+
+        jtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtUsuarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 220, 30));
+        getContentPane().add(jtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 220, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtUsuarioActionPerformed
+
+    private void jbInicioSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbInicioSesionMouseClicked
+        
+         String Usuario = "admin";
+         String Contra = "12345";
+         String Pass = new String(jtContra.getText());
+        
+            if(jtUsuario.getText().equals(Usuario) && Pass.equals(Contra)){
+                
+                Menu mn = new Menu();
+                mn.setVisible(true);
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña incorrectas");
+            }
+    }//GEN-LAST:event_jbInicioSesionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +126,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jbInicioSesion;
+    private javax.swing.JTextField jtContra;
+    private javax.swing.JTextField jtUsuario;
     // End of variables declaration//GEN-END:variables
 }
