@@ -9,7 +9,7 @@ package Vistas.ProyectoGym;
  * @author Ivan
  */
 public class Asistencia extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form Asistencias
      */
@@ -160,4 +160,5 @@ public class Asistencia extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
     // End of variables declaration//GEN-END:variables
+    //Nestor te mandaste un moco
 }
