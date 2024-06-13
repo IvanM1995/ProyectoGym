@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Vistas.ProyectoGym;
 
 import javax.swing.JInternalFrame;
@@ -136,6 +133,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu7.setText("Asistencias");
 
         jMenuItem9.setText("Gestion de Asistencias");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem9);
 
         jMenuBar1.add(jMenu7);
@@ -209,6 +211,17 @@ public class Menu extends javax.swing.JFrame {
         Menu.add(a);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        Menu.removeAll();
+         Menu.repaint();
+        
+        AsistenciaForm w = new AsistenciaForm();
+        Menu.add(w);
+        w.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
 
     /**
