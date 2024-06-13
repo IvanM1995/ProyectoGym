@@ -160,7 +160,7 @@ public class ClasesForm extends javax.swing.JInternalFrame {
             String nombre = jtNombreClase.getText();
 
             int selectedIndex = jcHorario.getSelectedIndex();
-            String Horario = jcHorario.getItemAt(selectedIndex);
+          
 
             String horarioString = jcHorario.getItemAt(selectedIndex);
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -190,6 +190,7 @@ public class ClasesForm extends javax.swing.JInternalFrame {
             }
 
             Clase c = new Clase(nombre, id, horario, capacidad, true);
+            
             claData.guardarClase(c);
 
             System.out.println("clase guardada" + c);

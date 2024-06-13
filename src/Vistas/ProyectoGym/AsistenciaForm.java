@@ -1,18 +1,27 @@
 
 package Vistas.ProyectoGym;
 
+import AccesoDatos.ProyectoGym.AsistenciaData;
 import AccesoDatos.ProyectoGym.ClaseData;
 import AccesoDatos.ProyectoGym.SocioData;
 import Entidades.ProyectoGym.Clase;
 import Entidades.ProyectoGym.Socio;
+import Entidades.ProyectoGym.Asistencia;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+
+import javax.swing.JOptionPane;
 
 
 public class AsistenciaForm extends javax.swing.JInternalFrame {
 
     private List<Clase>clases;
         private Clase clase;
-       
+       private AsistenciaData asiData;
         private ClaseData claData;
     
     
@@ -20,7 +29,7 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
     public AsistenciaForm() {
         initComponents();
         claData = new ClaseData();
-         
+         asiData = new AsistenciaData();
          Clase clase = null;
          llenarComboBoxConClases() ;
          llenarComboBoxConSocio();
@@ -47,16 +56,39 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
      
      
      private void InscribirAsistencia(){
-//     
-//        try{
+       try{
             
               int indices = jcSocioID.getSelectedIndex();
               Socio idSocio = jcSocioID.getItemAt(indices);
-              int indice = jcClaseID.getSelectedIndex();
-              Clase idClase = jcClaseID.getItemAt(indice);
-        
-        
-        
+              int indicec = jcClaseID.getSelectedIndex();
+              Clase idClase = jcClaseID.getItemAt(indicec);
+              
+              int selectedIndex = jcHorarioAsistencia.getSelectedIndex();
+          
+
+            String horarioString = jcHorarioAsistencia.getItemAt(selectedIndex);
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            java.util.Date date = null;
+            try {
+                date = sdf.parse(horarioString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+
+                JOptionPane.showMessageDialog(null, "Error al parsear el horario: " + e.getMessage());
+                return;
+            }
+             Time horario = new Time(date.getTime());
+             Date fecha =(Date) jdFechaAsistencia.getDate();
+              
+            Asistencia c = new Asistencia (idSocio, idClase, fecha, horario ,true);
+            
+            asiData.guardarAsistencia(c);
+
+            System.out.println("clase guardada" + c);
+       }catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "" + ex);
+
+        }
         
         
 //        
@@ -101,7 +133,7 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Fecha de Asistencia :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Horario de Asistencia :");
@@ -119,7 +151,7 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
         getContentPane().add(jdFechaAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 140, -1));
 
         jcHorarioAsistencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00" }));
-        getContentPane().add(jcHorarioAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 140, -1));
+        getContentPane().add(jcHorarioAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 150, -1));
 
         getContentPane().add(jcClaseID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 180, -1));
 
