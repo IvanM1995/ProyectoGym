@@ -35,7 +35,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -112,14 +111,16 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem5);
 
-        jMenuItem6.setText("Consultas");
-        jMenu5.add(jMenuItem6);
-
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Clase");
 
         jMenuItem7.setText("Gestion de Clases");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem7);
 
         jMenuItem8.setText("Consultas");
@@ -200,6 +201,15 @@ public class Menu extends javax.swing.JFrame {
          mostrarPestaña(new ClasesConsultaForm());
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+         Menu.removeAll();
+         Menu.repaint();
+        
+        ClasesForm a = new ClasesForm();
+        Menu.add(a);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -253,7 +263,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;

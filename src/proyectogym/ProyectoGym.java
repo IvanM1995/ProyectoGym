@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package proyectogym;
 
 import AccesoDatos.ProyectoGym.AsistenciaData;
@@ -33,8 +30,8 @@ public class ProyectoGym {
            Connection connection = Conexion.getConexion();
         
         
-             EntrenadorData ed = new EntrenadorData();
-//      Entrenador e = new Entrenador( "36746323" , "Josue","Molina","Musculacion","16:30",true);
+//             EntrenadorData ed = new EntrenadorData();
+////      Entrenador e = new Entrenador( "36746323" , "Josue","Molina","Musculacion","16:30",true);
 //      Entrenador f = new Entrenador( "34746323" , "Josue","Molina","BodyCombat","16:30",true);
 //       Entrenador g = new Entrenador( "33746323" , "Josue","Molina","Natacion","16:30",true);        
 //       Entrenador h = new Entrenador( "32746323" , "Josue","Molina","Musculacion","16:30",true);
@@ -152,8 +149,8 @@ public class ProyectoGym {
 //          System.out.println(clase.getHorario());
 //          System.out.println("");
 //      }
-
-  Entrenador nuevoEntrenador = new Entrenador();
+//
+//  Entrenador nuevoEntrenador = new Entrenador();
 //       nuevoEntrenador = ed.buscarEntrenadorxID(1);
         
         // Entrenador entrenadorMusc = new Entrenador( "36746323" , "Josue","Molina","Musculacion","16:30",true);
@@ -200,24 +197,24 @@ public class ProyectoGym {
 //      
 //        }             
       //}
- 
+// 
+//
+//       ClaseData cd = new ClaseData();
+//       SocioData sd = new SocioData();
+//       AsistenciaData ad = new AsistenciaData();
+//       
+//       Clase nuevaClase = cd.buscarClasePorId(1);
+//       Socio nuevoSocio = sd.buscarSocioPorId(4);
+//       Asistencia asistencia = new Asistencia(nuevoSocio, nuevaClase, Date.valueOf(LocalDate.now()), LocalTime.now(), true);
+//       
+//      ad.guardarAsistencia(asistencia);
+//       
+//    }
+//}
 
-       ClaseData cd = new ClaseData();
-       SocioData sd = new SocioData();
-       AsistenciaData ad = new AsistenciaData();
-       
-       Clase nuevaClase = cd.buscarClasePorId(1);
-       Socio nuevoSocio = sd.buscarSocioPorId(4);
-       Asistencia asistencia = new Asistencia(nuevoSocio, nuevaClase, Date.valueOf(LocalDate.now()), LocalTime.now(), true);
-       
-      ad.guardarAsistencia(asistencia);
-       
     }
-}
 
-      
-
-  
+    }
 
     
     
