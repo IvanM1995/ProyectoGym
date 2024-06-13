@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2024 a las 22:27:04
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Servidor: localhost:3308
+-- Tiempo de generación: 13-06-2024 a las 03:02:29
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,14 @@ CREATE TABLE `asistencia` (
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `asistencia`
+--
+
+INSERT INTO `asistencia` (`id_asistencia`, `id_socio`, `id_clase`, `fecha_asistencia`, `hora_asistencia`, `estado`) VALUES
+(1, 4, 1, '2024-06-10', '15:59:49', 1),
+(2, 4, 1, '2024-06-10', '23:30:20', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -61,7 +69,8 @@ INSERT INTO `clase` (`id_clase`, `nombre`, `id_entrenador`, `horario`, `capacida
 (8, 'natacion', 3, '14:00:00', 15, 1),
 (9, 'bodycombat', 4, '10:00:00', 15, 1),
 (10, 'bodyjump', 5, '14:00:00', 15, 1),
-(11, 'musculacion', 6, '14:00:00', 15, 1);
+(11, 'musculacion', 6, '14:00:00', 15, 1),
+(18, 'Crossfit', 6, '15:00:00', 20, 1);
 
 -- --------------------------------------------------------
 
@@ -103,8 +112,20 @@ CREATE TABLE `membresia` (
   `tipo` varchar(30) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
-  `estado` tinyint(1) NOT NULL
+  `estado` tinyint(1) NOT NULL,
+  `Costo` decimal(10,0) NOT NULL,
+  `CantidadPases` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `membresia`
+--
+
+INSERT INTO `membresia` (`id_membresia`, `id_socio`, `tipo`, `fecha_inicio`, `fecha_fin`, `estado`, `Costo`, `CantidadPases`) VALUES
+(2, 4, '', '2024-06-19', '2024-07-19', 0, 2560, 32),
+(5, 67, '32', '2024-06-10', '2024-07-10', 0, 1, 2024),
+(6, 1, 'Gold', '2024-06-11', '2024-07-11', 1, 2560, 32),
+(7, 67, 'Pilates', '2024-06-10', '2024-07-10', 1, 2880, 48);
 
 -- --------------------------------------------------------
 
@@ -129,9 +150,13 @@ CREATE TABLE `socio` (
 --
 
 INSERT INTO `socio` (`id_socio`, `dni`, `nombre`, `apellido`, `edad`, `correo`, `telefono`, `cont_asistencia`, `estado`) VALUES
-(1, '38566707', 'Matto', 'Ivan', 29, 'mattoivanezequiel1995@gmail.com', '2665032312', 12, 1),
-(4, '38566702', 'Rosales', 'L', 40, 'joserosales@gmail.com', '233492123', 12, 1),
-(5, '1245678', 'Perez', 'Jhon', 30, 'jhon@example.com', '128456789', 0, 1);
+(1, '38566707', 'Matto', 'Ivan', 25, 'mattoivanezequiel1995@gmail.com', '2665032312', 24, 1),
+(4, '38566702', 'Rosales', 'Luca', 40, 'joserosales@gmail.com', '233492123', 0, 1),
+(5, '1245678', 'Perez', 'Jhon', 30, 'jhon@example.com', '128456789', 0, 0),
+(67, '23891822', 'Jose Maria', 'Aviles', 22, 'jose@gmail.com', '2554123245', 0, 1),
+(68, '23985875', 'Juan', 'Miguel', 23, 'juan@hotmail.com', '2664529023', 0, 0),
+(69, '23809872', 'Juancito', 'Simon', 22, 'juancitopo@gmail.com', '2664772312', 0, 1),
+(70, '23123123', 'Lucas', 'Orion', 24, 'luki8@gmail.com', '2664232323', 12, 1);
 
 --
 -- Índices para tablas volcadas
@@ -182,13 +207,13 @@ ALTER TABLE `socio`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `id_asistencia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_asistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `clase`
 --
 ALTER TABLE `clase`
-  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `entrenador`
@@ -200,13 +225,13 @@ ALTER TABLE `entrenador`
 -- AUTO_INCREMENT de la tabla `membresia`
 --
 ALTER TABLE `membresia`
-  MODIFY `id_membresia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_membresia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `socio`
 --
 ALTER TABLE `socio`
-  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- Restricciones para tablas volcadas

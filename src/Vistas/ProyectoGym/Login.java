@@ -28,19 +28,15 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jbInicioSesion = new javax.swing.JButton();
         jtUsuario = new javax.swing.JTextField();
         jtContra = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
-        jLabel2.setText("Gestion de Gimnasio Acceso");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Usuario :");
@@ -67,12 +63,12 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 220, 30));
         getContentPane().add(jtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 220, 30));
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel2.setText("Gestion de Gimnasio Acceso");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtUsuarioActionPerformed
 
     private void jbInicioSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbInicioSesionMouseClicked
         
@@ -89,6 +85,10 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña incorrectas");
             }
     }//GEN-LAST:event_jbInicioSesionMouseClicked
+
+    private void jtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
