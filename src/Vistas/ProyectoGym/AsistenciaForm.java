@@ -78,7 +78,8 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
                 return;
             }
              Time horario = new Time(date.getTime());
-             Date fecha =(Date) jdFechaAsistencia.getDate();
+             Date fecha = new Date(jdFechaAsistencia.getDate().getTime());
+             
               
             Asistencia c = new Asistencia (idSocio, idClase, fecha, horario ,true);
             
