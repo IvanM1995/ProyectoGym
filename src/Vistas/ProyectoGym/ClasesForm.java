@@ -153,15 +153,15 @@ public class ClasesForm extends javax.swing.JInternalFrame {
     private void guardarClase()
     {
     
-        try{
+        try {
             int index = jcEntrenador.getSelectedIndex();
-                     
+
             Entrenador id = (jcEntrenador.getItemAt(index));
             String nombre = jtNombreClase.getText();
-            
+
             int selectedIndex = jcHorario.getSelectedIndex();
             String Horario = jcHorario.getItemAt(selectedIndex);
-            
+
             String horarioString = jcHorario.getItemAt(selectedIndex);
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             java.util.Date date = null;
@@ -169,52 +169,44 @@ public class ClasesForm extends javax.swing.JInternalFrame {
                 date = sdf.parse(horarioString);
             } catch (ParseException e) {
                 e.printStackTrace();
-                
+
                 JOptionPane.showMessageDialog(null, "Error al parsear el horario: " + e.getMessage());
-                return; 
+                return;
             }
             Time horario = new Time(date.getTime());
             int capacidad = Integer.parseInt(jtCapacidad.getText());
-             
-            if(nombre.isEmpty() || jtCapacidad.getText().equals("")){
+
+            if (nombre.isEmpty() || jtCapacidad.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "No debe haber campos vacios");
                 return;
-            
-            
-             }
-           
-            if(capacidad > 30 || !jtCapacidad.getText().matches("\\d+"))
-                
-            {
-                 JOptionPane.showMessageDialog(null, "No debe superar los 30 caracteres y deben ser todos digitos");
-                 
-                 jtCapacidad.setText("");
-                     return;
-            }
-            
-            
-            
-            Clase c = new Clase(nombre,id,horario,capacidad,true);
-            claData.guardarClase(c);
-            
 
-            
-     
-           
+            }
+
+            if (capacidad > 30 || !jtCapacidad.getText().matches("\\d+")) {
+                JOptionPane.showMessageDialog(null, "No debe superar los 30 caracteres y deben ser todos digitos");
+
+                jtCapacidad.setText("");
+                return;
+            }
+
+            Clase c = new Clase(nombre, id, horario, capacidad, true);
+            claData.guardarClase(c);
+
             System.out.println("clase guardada" + c);
-                        limpiarCampos();
-           
-        }catch(NumberFormatException ex){
-                JOptionPane.showMessageDialog(this,"" + ex);
-                
+            limpiarCampos();
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "" + ex);
+
         }
-     }
-      private void limpiarCampos(){
+
+    }
+
+    private void limpiarCampos() {
         jtNombreClase.setText("");
         jtCapacidad.setText("");
 
-    
-    
+
       }
     
 
