@@ -56,8 +56,8 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTablaGYM = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
-        jbModificar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setText("Listas de Clases");
@@ -101,18 +101,17 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jbModificar.setText("Modificar");
-        jbModificar.setEnabled(false);
-        jbModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbModificarActionPerformed(evt);
-            }
-        });
-
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarActionPerformed(evt);
+            }
+        });
+
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
             }
         });
 
@@ -139,8 +138,8 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(jbEliminar)
-                .addGap(178, 178, 178)
-                .addComponent(jbModificar)
+                .addGap(173, 173, 173)
+                .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
@@ -172,7 +171,7 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbEliminar)
-                    .addComponent(jbModificar))
+                    .addComponent(jbLimpiar))
                 .addGap(21, 21, 21))
         );
 
@@ -221,13 +220,13 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtEntrenadorIDActionPerformed
 
-    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-       
-    }//GEN-LAST:event_jbModificarActionPerformed
-
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+       limpiarTabla();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -238,7 +237,7 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
-    private javax.swing.JButton jbModificar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtEntrenadorID;
     private javax.swing.JTextField jtNombre;
