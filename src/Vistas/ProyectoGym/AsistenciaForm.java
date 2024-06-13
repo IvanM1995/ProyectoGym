@@ -123,12 +123,13 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
         jdFechaAsistencia = new com.toedter.calendar.JDateChooser();
         jcHorarioAsistencia = new javax.swing.JComboBox<>();
         jcClaseID = new javax.swing.JComboBox<>();
+        jbSalir = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
         jLabel1.setText("Gestion de Asistencias");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Clase ID :");
@@ -152,7 +153,7 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
                 jbInscribirActionPerformed(evt);
             }
         });
-        getContentPane().add(jbInscribir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 80, 40));
+        getContentPane().add(jbInscribir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 80, 40));
 
         getContentPane().add(jcSocioID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 180, -1));
         getContentPane().add(jdFechaAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 140, -1));
@@ -162,12 +163,24 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
 
         getContentPane().add(jcClaseID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 180, -1));
 
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 80, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
         InscribirAsistencia();
     }//GEN-LAST:event_jbInscribirActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+       dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -178,6 +191,7 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jbInscribir;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Clase> jcClaseID;
     private javax.swing.JComboBox<String> jcHorarioAsistencia;
     private javax.swing.JComboBox<Socio> jcSocioID;
