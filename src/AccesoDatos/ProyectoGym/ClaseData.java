@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Ivan
@@ -57,7 +56,6 @@ public class ClaseData {
             JOptionPane.showMessageDialog(null,"Error al acceder a la columna clase" + ex.getMessage());
             
         }
-        
       }
     
     public List<Clase>listarClasesPorNombre( String nombre){
