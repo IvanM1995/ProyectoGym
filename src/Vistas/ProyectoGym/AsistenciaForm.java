@@ -3,6 +3,7 @@ package Vistas.ProyectoGym;
 
 import AccesoDatos.ProyectoGym.AsistenciaData;
 import AccesoDatos.ProyectoGym.ClaseData;
+import AccesoDatos.ProyectoGym.MembresiaData;
 import AccesoDatos.ProyectoGym.SocioData;
 import Entidades.ProyectoGym.Clase;
 import Entidades.ProyectoGym.Socio;
@@ -23,6 +24,8 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
         private Clase clase;
        private AsistenciaData asiData;
         private ClaseData claData;
+        private MembresiaData membresia;
+ 
     
     
     
@@ -33,6 +36,7 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
          Clase clase = null;
          llenarComboBoxConClases() ;
          llenarComboBoxConSocio();
+         membresia = new MembresiaData();
     }
       
     
@@ -84,6 +88,8 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
             Asistencia c = new Asistencia (idSocio, idClase, fecha, horario ,true);
             
             asiData.guardarAsistencia(c);
+          
+               
 
             System.out.println("clase guardada" + c);
        }catch (NumberFormatException ex) {

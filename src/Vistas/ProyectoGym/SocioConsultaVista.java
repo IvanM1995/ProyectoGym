@@ -303,30 +303,7 @@ private SocioData socioData;
         listarSocios(); 
     }
     
-   private void jTable1PropertyChange(java.beans.PropertyChangeEvent evt) {                                       
-    if (evt.getPropertyName().equals("tableCellEditor") && jTable1.isEditing() == false) {
-        int fila = jTable1.getSelectedRow();
-        if (fila != -1) {
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de modificar este socio?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
-            if (opcion == JOptionPane.YES_OPTION) {
-                int idSocio = (int) jTable1.getValueAt(fila, 0);
-                String dni = (String) jTable1.getValueAt(fila, 1);
-                String nombre = (String) jTable1.getValueAt(fila, 2);
-                String apellido = (String) jTable1.getValueAt(fila, 3);
-                int edad = (int) jTable1.getValueAt(fila, 4);
-                String correo = (String) jTable1.getValueAt(fila, 5);
-                String telefono = (String) jTable1.getValueAt(fila, 6);
-                int asistencia = Integer.parseInt(jTable1.getValueAt(fila, 7).toString());
-                
-                Socio socio = new Socio(idSocio, dni, nombre, apellido, edad, correo, telefono);
-                socio.setContador_asistencia(asistencia);
-                socioData.modificarSocio(socio);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecciona un socio de la tabla para modificar.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-}
+  
 
     
     
