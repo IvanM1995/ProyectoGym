@@ -31,18 +31,10 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jcEntrenador" max="32767" attributes="0"/>
-                              <EmptySpace pref="300" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtNombreClase" min="-2" pref="141" max="-2" attributes="0"/>
-                                  <Component id="jtCapacidad" min="-2" pref="43" max="-2" attributes="0"/>
-                                  <Component id="jcHorario" min="-2" pref="160" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="192" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jtCapacidad" min="-2" pref="43" max="-2" attributes="0"/>
+                          <Component id="jcHorario" pref="160" max="32767" attributes="0"/>
+                          <Component id="jtNombreClase" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jcEntrenador" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -55,9 +47,9 @@
                           </Group>
                           <Component id="jLabel1" min="-2" pref="174" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="170" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace pref="258" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

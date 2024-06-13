@@ -66,23 +66,33 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Fecha de Asistencia :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 194, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Horario de Asistencia :");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
 
         jbInscribir.setText("Inscribir");
+        jbInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInscribirActionPerformed(evt);
+            }
+        });
         getContentPane().add(jbInscribir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 80, 40));
-        getContentPane().add(jtSocioID, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 125, 150, -1));
+        getContentPane().add(jtSocioID, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 125, 160, -1));
 
         getContentPane().add(jcClaseID, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 170, -1));
-        getContentPane().add(jdFechaAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, -1, -1));
+        getContentPane().add(jdFechaAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 140, -1));
 
-        getContentPane().add(jcHorarioAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 90, -1));
+        jcHorarioAsistencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00" }));
+        getContentPane().add(jcHorarioAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbInscribirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
