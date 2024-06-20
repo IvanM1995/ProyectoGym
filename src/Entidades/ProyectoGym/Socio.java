@@ -129,7 +129,7 @@ public class Socio {
 
     @Override
     public String toString() {
-        return "ID Socio = " + id_socio + " | Nombre y Apellido = " + nombre +" "+ apellido + " | DNI = " + dni + " | Edad = " + edad + " | Correo = " + correo + " | Telefono = " + telefono + " | Contador_asistencia = " + contador_asistencia;
+        return dni + "" +nombre +" "+ apellido;
     }
 
 }

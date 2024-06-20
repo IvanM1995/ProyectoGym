@@ -32,6 +32,47 @@ public class ClaseData {
         con = Conexion.getConexion();
     }
     
+    
+  
+   public int ConsultaCantidad(Clase clase) {
+    int count = 0;
+    String sql = "SELECT COUNT(*) FROM asistencia WHERE Id_clase = ?;";
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, clase.getId_clase());
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt(1);
+        }
+        rs.close();
+        ps.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return count;
+  }
+    
+   public boolean ConsultaCapacidad(Clase clase){
+       
+       int count = ConsultaCantidad(clase);
+       int capacidad = clase.getCapacidad();
+       return (count <= capacidad);
+       
+       
+   
+ }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
     public void guardarClase(Clase clase){
         
         String sql = "INSERT INTO clase (nombre,id_entrenador,horario,capacidad,estado) VALUE(?,?,?,?,?)";

@@ -23,6 +23,7 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
     private List<Clase>clases;
         private Clase clase;
        private AsistenciaData asiData;
+      
         private ClaseData claData;
         private MembresiaData membresia;
  
@@ -60,7 +61,8 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
      
      
      private void InscribirAsistencia(){
-       try{
+       
+         try{
             
               int indices = jcSocioID.getSelectedIndex();
               Socio idSocio = jcSocioID.getItemAt(indices);
@@ -86,21 +88,35 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
              
               
             Asistencia c = new Asistencia (idSocio, idClase, fecha, horario ,true);
-            
+             
+            if( claData.ConsultaCapacidad(idClase)&& idSocio.getContador_asistencia()>0)
+            {
             asiData.guardarAsistencia(c);
-          
-               
-
             System.out.println("clase guardada" + c);
+            idSocio.setContador_asistencia(idSocio.getContador_asistencia()-1);
+            }
+            else
+                if
+            (! claData.ConsultaCapacidad(idClase)){
+            
+            JOptionPane.showMessageDialog(this, "no puede inscribirse clase en su maxima capacidad" );
+            
+            }
+                else if(idSocio.getContador_asistencia()==0)
+                        {
+                        
+                             JOptionPane.showMessageDialog(this, "no puede inscribirse socio sin pases" );
+                        
+                        }
+
+            
        }catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "" + ex);
 
         }
         
         
-//        
-//        }
-     
+
      
      
      

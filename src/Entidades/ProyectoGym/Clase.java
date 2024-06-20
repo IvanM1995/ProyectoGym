@@ -11,7 +11,7 @@ import java.sql.Time;
  * @author Ivan
  */
 public class Clase {
-     private int id_clase;
+    private int id_clase;
     private String nombre;
     private Entrenador id_entrenador;
     private Time horario;
@@ -88,7 +88,7 @@ public class Clase {
 
     @Override
     public String toString() {
-        return "Clase{" + "id_clase: " + id_clase + "; Nombre: " + nombre + "; id_entrenador: " + id_entrenador + "; Horario: " + horario + "; Capacidad: " + capacidad + "; Estado: " + estado + '}';
+        return id_clase + " " + nombre ;
     }
 
     

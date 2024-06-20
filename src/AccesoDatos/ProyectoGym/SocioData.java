@@ -25,6 +25,7 @@ public class SocioData {
         con = Conexion.getConexion();
     }
     
+    
     public boolean guardarSocio(Socio socio){
         Boolean flag=false;
         PreparedStatement ps;

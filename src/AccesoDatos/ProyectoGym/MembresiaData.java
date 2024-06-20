@@ -23,9 +23,13 @@ import javax.swing.JOptionPane;
  */
 public class MembresiaData {
      private Connection connection = null;
+     private SocioData socData;
+     private Socio soc;
     
     public MembresiaData() {
          connection = Conexion.getConexion();
+         socData = new SocioData();
+         soc = new Socio();
          
 }
      public Boolean registrarMembresia (Membresia membresia){
@@ -34,6 +38,7 @@ public class MembresiaData {
     try {
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         int idSocio = membresia.getId_socio().getId_socio();
+        
         ps.setInt(1, idSocio);
         ps.setString(2, membresia.getTipo());
         ps.setDate(3, membresia.getFecha_inicio());
@@ -48,6 +53,9 @@ public class MembresiaData {
                    membresia.setId_membresia((rs.getInt(1)));
                 System.out.println("Id Membresia "+ membresia.getId_membresia());
                 JOptionPane.showMessageDialog(null, "Registrado con exito."); 
+                soc = socData.buscarSocioPorId(idSocio);
+                soc.setContador_asistencia(membresia.getCant_pases());
+                socData.modificarSocio(soc);
                 flag=true;
             }
             ps.close();
@@ -55,13 +63,14 @@ public class MembresiaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Membresia"+ex.getMessage()); 
         }
+    
         return flag;
     }
      
      
     public List<Membresia> obtenerMembresiasPorSocio(int idSocio) {
     List<Membresia> membresias = new ArrayList<>();
-    String sql = "SELECT * FROM Membresia WHERE id_socio = ?";
+    String sql = "SELECT * FROM Membresia WHERE id_socio = ? AND estado = true";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
         statement.setInt(1, idSocio);
         ResultSet rs = statement.executeQuery();

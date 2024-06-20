@@ -6,6 +6,7 @@
 package Vistas.ProyectoGym;
 
 import AccesoDatos.ProyectoGym.MembresiaData;
+import AccesoDatos.ProyectoGym.SocioData;
 import Entidades.ProyectoGym.Membresia;
 import Entidades.ProyectoGym.Socio;
 import java.util.List;
@@ -19,6 +20,9 @@ import javax.swing.table.DefaultTableModel;
 public class MembresiaConsultaVista extends javax.swing.JInternalFrame {
     
 private final MembresiaData membresiaData;
+private SocioData socData = new SocioData();
+private Socio soc = new Socio();
+         
 
    public MembresiaConsultaVista() {
         initComponents();
@@ -273,9 +277,13 @@ private final MembresiaData membresiaData;
         int filaSeleccionada = jTable1.getSelectedRow();
     if (filaSeleccionada != -1) {
         int idMembresia = (int) jTable1.getValueAt(filaSeleccionada, 0); 
+        int idSocio = (int)jTable1.getValueAt(filaSeleccionada, 1);
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea cancelar esta membresía?", "Confirmar cancelación", JOptionPane.YES_NO_OPTION);
     if (confirmacion == JOptionPane.YES_OPTION) {
         cancelarMembresia(idMembresia);
+        soc = socData.buscarSocioPorId(idSocio);
+        soc.setContador_asistencia(0);
+        socData.modificarSocio(soc);
     } else {
         JOptionPane.showMessageDialog(this, "Seleccione una membresía para cancelar.");
     }
@@ -290,6 +298,10 @@ private final MembresiaData membresiaData;
           int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea renovar esta membresía?", "Confirmar renovación", JOptionPane.YES_NO_OPTION);
     if (confirmacion == JOptionPane.YES_OPTION) {
         renovarMembresia(idMembresia);
+        soc = socData.buscarSocioPorId(idSocio);
+        soc.setContador_asistencia(soc.getContador_asistencia()+(int) jTable1.getValueAt(filaSeleccionada,6));
+        socData.modificarSocio(soc);
+        
     } else {
         JOptionPane.showMessageDialog(this, "Seleccione una membresía para renovar.");
     }

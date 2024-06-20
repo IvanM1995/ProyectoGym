@@ -6,6 +6,7 @@
 package Vistas.ProyectoGym;
 
 import AccesoDatos.ProyectoGym.MembresiaData;
+import AccesoDatos.ProyectoGym.SocioData;
 import Entidades.ProyectoGym.Membresia;
 import Entidades.ProyectoGym.Socio;
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane;
 public class MembresiaVista extends javax.swing.JInternalFrame {
 
     private MembresiaData membresiaData;
+    private SocioData socDat;
     private static final BigDecimal PREMIUM_COST = new BigDecimal("100.00");
     private static final BigDecimal GOLD_COST = new BigDecimal("80.00");
     private static final BigDecimal PILATES_COST = new BigDecimal("60.00");
@@ -31,6 +33,7 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
   public MembresiaVista() {
         initComponents();
         membresiaData = new MembresiaData();
+        socDat = new SocioData();
         actualizarCosto();
     }
 
@@ -288,6 +291,8 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
         membresia.setFecha_fin(Date.valueOf(fechaFin));
         membresia.setCosto(costo);
         membresia.setEstado(true);
+        
+        
 
         if (membresiaData == null) {
             JOptionPane.showMessageDialog(this, "Error interno: No se puede acceder a la base de datos.");

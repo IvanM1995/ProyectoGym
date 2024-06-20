@@ -74,6 +74,7 @@ public class EntrenadorData {
           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Entrenador");
            
         }
+    
         
         }
         public List<Entrenador>listarEntrenadores(){  
@@ -211,12 +212,12 @@ public class EntrenadorData {
                     
                     }
             else{
-                JOptionPane.showMessageDialog(null, "Alumno inexistente");
+                JOptionPane.showMessageDialog(null, "Entrenador inexistente");
                 ps.close();
             }
             }  catch (SQLException ex)  
                     {
-                     JOptionPane.showMessageDialog(null,"error al acceder a la tabla Alumno" + ex.getMessage());
+                     JOptionPane.showMessageDialog(null,"error al acceder a la tabla Entrenador" + ex.getMessage());
                     
                     }
         
