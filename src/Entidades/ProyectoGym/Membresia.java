@@ -25,7 +25,7 @@ public class Membresia {
     public Membresia() {
     }
 
-    public Membresia(Socio id_socio, String tipo, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
+    public Membresia(Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado, String tipo) {
         this.id_socio = id_socio;
         this.cant_pases = cant_pases;
         this.fecha_inicio = fecha_inicio;
@@ -35,7 +35,7 @@ public class Membresia {
         this.tipo = tipo;
     }
 
-    public Membresia(int id_membresia, String tipo, Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
+    public Membresia(int id_membresia, Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado, String tipo) {
         this.id_membresia = id_membresia;
         this.id_socio = id_socio;
         this.cant_pases = cant_pases;
@@ -108,6 +108,11 @@ public class Membresia {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Membresia " +  tipo ;
     }
 
     

@@ -34,43 +34,61 @@ public class ClaseData {
     
     
   
-   public int ConsultaCantidad(Clase clase) {
-    int count = 0;
-    String sql = "SELECT COUNT(*) FROM asistencia WHERE Id_clase = ?;";
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, clase.getId_clase());
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            count = rs.getInt(1);
+    public int ConsultaCantidad(Clase clase) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM asistencia WHERE Id_clase = ?;";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, clase.getId_clase());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        rs.close();
-        ps.close();
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return count;
     }
-    return count;
-  }
-    
-   public boolean ConsultaCapacidad(Clase clase){
-       
-       int count = ConsultaCantidad(clase);
-       int capacidad = clase.getCapacidad();
-       return (count <= capacidad);
-       
-       
-   
- }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public boolean ConsultaCapacidad(Clase clase) {
+
+        int count = ConsultaCantidad(clase);
+        int capacidad = clase.getCapacidad();
+        return (count <= capacidad);
+
+    }
+
+    public boolean comprobarEntrenador(int id, Time horario) {
+
+        String sql = "SELECT COUNT(*) FROM clase WHERE id_entrenador = ? AND horario = ?";
+
+        int contador = 0;
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.setTime(2, horario);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+
+                    contador = rs.getInt(1);
+
+                }
+
+            }
+
+            if (contador > 0) {
+                return false;
+            }
+         
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Clase");
+        }
+
+        return true;
+
+    }
     
    
     public void guardarClase(Clase clase){

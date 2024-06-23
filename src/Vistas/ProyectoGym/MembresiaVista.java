@@ -23,6 +23,7 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
 
     private MembresiaData membresiaData;
     private SocioData socDat;
+    private Socio soc;
     private static final BigDecimal PREMIUM_COST = new BigDecimal("100.00");
     private static final BigDecimal GOLD_COST = new BigDecimal("80.00");
     private static final BigDecimal PILATES_COST = new BigDecimal("60.00");
@@ -34,6 +35,7 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
         initComponents();
         membresiaData = new MembresiaData();
         socDat = new SocioData();
+        soc = new Socio();
         actualizarCosto();
     }
 
@@ -92,7 +94,7 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
         jLabel1.setText("Inscripción Membresia");
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Id Socio:");
+        jLabel2.setText("Dni Socio");
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Membresia: ");
@@ -126,6 +128,11 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
                 registrarMembresia();
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Fecha de inicio:");
 
@@ -147,7 +154,7 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addGap(0, 168, Short.MAX_VALUE)
+                .addGap(52, 168, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -157,23 +164,23 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(53, 53, 53)
+                                .addGap(18, 18, 18)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addGap(25, 25, 25)
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(TextIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jComboBox1, 0, 120, Short.MAX_VALUE)
+                                            .addComponent(TextIdSocio)))
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addGap(36, 36, 36)
                                         .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(229, Short.MAX_VALUE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
@@ -187,19 +194,19 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(TextIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(25, 25, 25)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,6 +240,10 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextIdSocioActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
      private void actualizarCosto() {
         String tipoMembresia = (String) jComboBox1.getSelectedItem();
@@ -263,11 +274,20 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
    private void registrarMembresia() {
     try {
         if (TextIdSocio.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese un ID de Socio válido.");
+            JOptionPane.showMessageDialog(this, "Ingrese un Dni de Socio válido.");
             return;
         }
+        
+        
 
-        int idSocio = Integer.parseInt(TextIdSocio.getText());
+        String dni = TextIdSocio.getText();
+        soc = socDat.buscarSocioPorDni(dni);
+        if (soc.getDni()==null) {
+            
+            return;
+        }
+        
+        
         String tipoMembresia = (String) jComboBox1.getSelectedItem();
         int cantidadPases = Integer.parseInt((String) jComboBox2.getSelectedItem());
 
@@ -280,11 +300,11 @@ public class MembresiaVista extends javax.swing.JInternalFrame {
         LocalDate fechaFin = fechaInicio.plusMonths(1); 
         BigDecimal costo = new BigDecimal(jLabel7.getText());
 
-        Socio socio = new Socio();
-        socio.setId_socio(idSocio);
-
+       
+        
+     
         Membresia membresia = new Membresia();
-        membresia.setId_socio(socio);
+        membresia.setId_socio(soc);
         membresia.setTipo(tipoMembresia); 
         membresia.setCant_pases(cantidadPases);
         membresia.setFecha_inicio(Date.valueOf(fechaInicio));

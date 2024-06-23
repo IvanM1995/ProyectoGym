@@ -52,7 +52,7 @@ public class MembresiaData {
 
                    membresia.setId_membresia((rs.getInt(1)));
                 System.out.println("Id Membresia "+ membresia.getId_membresia());
-                JOptionPane.showMessageDialog(null, "Registrado con exito."); 
+               
                 soc = socData.buscarSocioPorId(idSocio);
                 soc.setContador_asistencia(membresia.getCant_pases());
                 socData.modificarSocio(soc);
@@ -85,6 +85,7 @@ public class MembresiaData {
             membresia.setFecha_fin(rs.getDate("fecha_fin"));
             membresia.setCosto(rs.getBigDecimal("Costo"));
             membresia.setEstado(rs.getBoolean("estado"));
+            membresia.setTipo(rs.getString("Tipo"));
             membresias.add(membresia);
         }
     } catch (SQLException e) {

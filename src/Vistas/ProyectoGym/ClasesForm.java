@@ -16,16 +16,19 @@ import java.sql.Time;
 public class ClasesForm extends javax.swing.JInternalFrame {
         private List<Clase>clases;
         private Clase clase;
-       
+       private Entrenador entrenador;
         private ClaseData claData;
+        private EntrenadorData entreData;
+        private List<Entrenador> entrenadores;
 
    
     public ClasesForm() {
         initComponents();
          claData = new ClaseData();
-         
+         entreData = new EntrenadorData();
+         entrenador = new Entrenador();
          Clase clase = null;
-         llenarComboBoxConEntrenadores() ;
+     
          
     }
 
@@ -44,14 +47,14 @@ public class ClasesForm extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jtNombreClase = new javax.swing.JTextField();
         jcHorario = new javax.swing.JComboBox<>();
-        jcEntrenador = new javax.swing.JComboBox<>();
+        jtEntrenador = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setText("Gestion de Clases");
 
         jLabel2.setText("Nombre de la Clase:");
 
-        jLabel3.setText("ID del Entrenador :");
+        jLabel3.setText("DNI Entrenador ");
 
         jLabel4.setText("Horario:");
 
@@ -91,7 +94,7 @@ public class ClasesForm extends javax.swing.JInternalFrame {
                             .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcHorario, 0, 160, Short.MAX_VALUE)
                             .addComponent(jtNombreClase)
-                            .addComponent(jcEntrenador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jtEntrenador)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(67, 67, 67)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -110,11 +113,11 @@ public class ClasesForm extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtNombreClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jcEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(jtEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jcHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,13 +143,15 @@ public class ClasesForm extends javax.swing.JInternalFrame {
        dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
     
-    private void llenarComboBoxConEntrenadores() {
-        EntrenadorData entredata = new EntrenadorData();
-        List<Entrenador> entrenadores = entredata.listarEntrenadores();
-        for (Entrenador entrenador : entrenadores) {
-            jcEntrenador.addItem(entrenador);
-        }
-    }
+//    private void llenarComboBoxConEntrenadores() {
+//        
+//        List<Entrenador> entrenadores = entreData.listarEntrenadores();
+//        for (Entrenador entrenador : entrenadores) {
+//            jcEntrenador.addItem(entrenador);
+//        }
+//    }
+//    
+    
     
     
      
@@ -154,9 +159,22 @@ public class ClasesForm extends javax.swing.JInternalFrame {
     {
     
         try {
-            int index = jcEntrenador.getSelectedIndex();
+            
 
-            Entrenador id = (jcEntrenador.getItemAt(index));
+            String dni = jtEntrenador.getText();
+            entrenadores = entreData.buscarEntrenadorxDni(dni);
+            
+            for(Entrenador c : entrenadores)
+            {
+             entrenador = c;
+            }
+            
+            if(entrenador.getDni()== null)
+                    {
+                        JOptionPane.showMessageDialog(null, "No existe el entrenador");
+                        return;
+                    }
+            
             String nombre = jtNombreClase.getText();
 
             int selectedIndex = jcHorario.getSelectedIndex();
@@ -174,6 +192,7 @@ public class ClasesForm extends javax.swing.JInternalFrame {
                 return;
             }
             Time horario = new Time(date.getTime());
+            if( claData.comprobarEntrenador(entrenador.getId_entrenador(),horario)){
             int capacidad = Integer.parseInt(jtCapacidad.getText());
 
             if (nombre.isEmpty() || jtCapacidad.getText().equals("")) {
@@ -189,13 +208,18 @@ public class ClasesForm extends javax.swing.JInternalFrame {
                 return;
             }
 
-            Clase c = new Clase(nombre, id, horario, capacidad, true);
+            Clase c = new Clase(nombre, entrenador, horario, capacidad, true);
             
             claData.guardarClase(c);
 
-            System.out.println("clase guardada" + c);
+            System.out.println("clase guardada " +c.getNombre());
             limpiarCampos();
-
+            }else{
+                
+                    
+                 JOptionPane.showMessageDialog(null,"Entrenador ocupado en la semana durante horario elegido");
+            
+            } 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "" + ex);
 
@@ -219,9 +243,9 @@ public class ClasesForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<Entrenador> jcEntrenador;
     private javax.swing.JComboBox<String> jcHorario;
     private javax.swing.JTextField jtCapacidad;
+    private javax.swing.JTextField jtEntrenador;
     private javax.swing.JTextField jtNombreClase;
     // End of variables declaration//GEN-END:variables
 

@@ -28,6 +28,7 @@ private Socio soc = new Socio();
         initComponents();
         membresiaData = new MembresiaData();
         limpiarTabla();
+      
     }
  
 
@@ -46,8 +47,6 @@ private Socio soc = new Socio();
         BotonListar = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        EliminarBoton = new javax.swing.JButton();
         BotonCancelar = new javax.swing.JButton();
         BotonRenovar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -102,16 +101,6 @@ private Socio soc = new Socio();
             }
         });
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Eliminar Membresia de la tabla:");
-
-        EliminarBoton.setText("Eliminar");
-        EliminarBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarBotonActionPerformed(evt);
-            }
-        });
-
         BotonCancelar.setText("Cancelar Membresia");
         BotonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,8 +126,6 @@ private Socio soc = new Socio();
         jDesktopPane1.setLayer(BotonListar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(EliminarBoton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(BotonCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(BotonRenovar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -173,54 +160,35 @@ private Socio soc = new Socio();
                                         .addComponent(BotonListar)))
                                 .addGap(139, 139, 139)))
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(EliminarBoton))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addComponent(BotonRenovar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(BotonCancelar)
-                                        .addGap(17, 17, 17)))))
-                        .addContainerGap(38, Short.MAX_VALUE))))
+                                .addGap(22, 22, 22)
+                                .addComponent(BotonRenovar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BotonCancelar)
+                                .addGap(53, 53, 53))))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(EliminarBoton)))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BotonSocio)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(BotonListar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BotonRenovar)
-                            .addComponent(BotonCancelar))
-                        .addGap(9, 9, 9)))
+                .addGap(14, 14, 14)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotonSocio)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(BotonListar)
+                    .addComponent(BotonRenovar)
+                    .addComponent(BotonCancelar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3))
@@ -242,36 +210,25 @@ private Socio soc = new Socio();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//////
     private void BotonSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSocioActionPerformed
  try {
         int idSocio = Integer.parseInt(jTextField1.getText());
         buscarMembresiasPorIdSocio(idSocio);
         BotonRenovar.setEnabled(true); 
-        EliminarBoton.setEnabled(true);
+//        EliminarBoton.setEnabled(true);
         BotonCancelar.setEnabled(true);
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Ingrese un ID de Socio válido.");
         BotonRenovar.setEnabled(false); 
         BotonCancelar.setEnabled(false); 
-        EliminarBoton.setEnabled(false);
+//        EliminarBoton.setEnabled(false);
     }
     }//GEN-LAST:event_BotonSocioActionPerformed
-
-    private void BotonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonListarActionPerformed
-        cargarTodasLasMembresias();
-    EliminarBoton.setEnabled(false);
-    BotonRenovar.setEnabled(false);
-    BotonCancelar.setEnabled(false);
-    }//GEN-LAST:event_BotonListarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         limpiarTabla();
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void EliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBotonActionPerformed
-       eliminarMembresiaSeleccionada();
-    }//GEN-LAST:event_EliminarBotonActionPerformed
 
     private void BotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarActionPerformed
         int filaSeleccionada = jTable1.getSelectedRow();
@@ -307,6 +264,13 @@ private Socio soc = new Socio();
     }
     }
     }//GEN-LAST:event_BotonRenovarActionPerformed
+
+    private void BotonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonListarActionPerformed
+        cargarTodasLasMembresias();
+//        EliminarBoton.setEnabled(false);
+        BotonRenovar.setEnabled(false);
+        BotonCancelar.setEnabled(false);
+    }//GEN-LAST:event_BotonListarActionPerformed
  private void cargarTodasLasMembresias() {
         List<Membresia> membresias = membresiaData.obtenerTodasLasMembresias();
         mostrarMembresiasEnTabla(membresias);
@@ -390,13 +354,11 @@ private void cancelarMembresia(int idMembresia) {
     private javax.swing.JButton BotonListar;
     private javax.swing.JButton BotonRenovar;
     private javax.swing.JButton BotonSocio;
-    private javax.swing.JButton EliminarBoton;
     private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

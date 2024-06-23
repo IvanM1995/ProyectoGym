@@ -25,11 +25,13 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
     private Clase nuevaClase = null;
     private DefaultTableModel modelo;
     
+    
     private SocioData sd = new SocioData();
     private EntrenadorData ed = new EntrenadorData();
     private ClaseData claseD = new ClaseData();
     public ClasesConsultaForm() {
         initComponents();
+        
         modelo = new DefaultTableModel();
         llenarTabla();
         armarCabeceraTabla();
@@ -66,7 +68,7 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
         jLabel2.setText("Busqueda por Nombre :");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setText("Busqueda por ID Entrenador :");
+        jLabel4.setText("Busqueda por DNi Entrenador :");
 
         jtEntrenadorID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,23 +192,37 @@ public class ClasesConsultaForm extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
       try {
             String nombre = jtNombre.getText();
-            int idEntrenador = jtEntrenadorID.getText().isEmpty() ? -1 : Integer.parseInt(jtEntrenadorID.getText());
+            String dni = jtEntrenadorID.getText();
             List<Clase> clases;
 
         if (!nombre.isEmpty()) {
              clases = claseD.listarClasesPorNombre(nombre);
-           }else if (idEntrenador != -1) {
-             Entrenador entrenador = ed.buscarEntrenadorxID(idEntrenador);
-            if (entrenador != null) {
+           }else if (!dni.isEmpty()) {
+             List<Entrenador> entrenadores = ed.buscarEntrenadorxDni(dni);
+            Entrenador entrenador = new Entrenador();
+             for(Entrenador e : entrenadores)
+             {
+                 entrenador = e;
+             
+             }
+            if (entrenador.getDni()!= null) {
              clases = claseD.listarClasesPorEntrenador(entrenador);
+             
            }else {
-             JOptionPane.showMessageDialog(this, "Entrenador no encontrado con ID: " + idEntrenador);
+             JOptionPane.showMessageDialog(this, "Entrenador no encontrado con dni: " + dni);
+                 jtEntrenadorID.setText("");
+                 jtNombre.setText("");
+                 limpiarTabla();
+                 
+                 
+         
            return;
                     }
           }else {
               clases = claseD.listarClases();
                 }  
                  limpiarTabla();
+                 
            for(Clase clase:clases){
               modelo.addRow(new Object[]{clase.getId_clase(),clase.getNombre(),clase.getId_entrenador().getId_entrenador(),clase.getHorario(),clase.getCapacidad(),clase.isEstado()});
               }

@@ -45,7 +45,7 @@ public class SocioData {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()) {
                 socio.setId_socio(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Inscripto!"); 
+                
                 flag=true;
             }
             ps.close();
@@ -158,6 +158,36 @@ public class SocioData {
         }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al intentar eliminar el Socio ID: "); 
         }    
+    }
+    
+    public Socio buscarSocioPorDni(String dni){
+        Socio socio = new Socio();
+        ResultSet rs;
+        PreparedStatement ps;
+        String sql = "SELECT * FROM socio WHERE dni = ? AND estado = 1";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, dni);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                socio.setId_socio(rs.getInt(1));
+                socio.setDni(rs.getString("dni"));
+                socio.setNombre(rs.getString("nombre"));
+                socio.setApellido(rs.getString("apellido"));
+                socio.setEdad(rs.getInt("edad"));
+                socio.setCorreo(rs.getString("correo"));
+                socio.setTelefono(rs.getString("telefono"));
+                socio.setContador_asistencia(rs.getInt("cont_asistencia"));
+            }else{
+                JOptionPane.showMessageDialog(null, "El Socio no existe o fue dado de baja...");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socio: "+ex.getMessage()); 
+        }
+        
+       
+    return socio;
     }
     
 }
