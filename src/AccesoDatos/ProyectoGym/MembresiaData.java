@@ -70,7 +70,7 @@ public class MembresiaData {
      
     public List<Membresia> obtenerMembresiasPorSocio(int idSocio) {
     List<Membresia> membresias = new ArrayList<>();
-    String sql = "SELECT * FROM Membresia WHERE id_socio = ?";
+    String sql = "SELECT * FROM Membresia WHERE id_socio = ?  AND estado = true";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
         statement.setInt(1, idSocio);
         ResultSet rs = statement.executeQuery();
@@ -180,8 +180,35 @@ public class MembresiaData {
             JOptionPane.showMessageDialog(null, "Actualizado con exito");
             return new ArrayList<>();
         }
-        return obtenerMembresiasPorSocio(socio.getId_socio());
+        return obtenerMembresiasPorSocio2(socio.getId_socio());
     }
+     
+     
+      public List<Membresia> obtenerMembresiasPorSocio2(int idSocio) {
+    List<Membresia> membresias = new ArrayList<>();
+    String sql = "SELECT * FROM Membresia WHERE id_socio = ?";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setInt(1, idSocio);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Membresia membresia = new Membresia();
+            membresia.setId_membresia(rs.getInt("id_membresia"));
+             Socio socio = new Socio();
+            socio.setId_socio(idSocio);
+            membresia.setId_socio(socio);
+            membresia.setCant_pases(rs.getInt("CantidadPases"));
+            membresia.setFecha_inicio(rs.getDate("fecha_inicio"));
+            membresia.setFecha_fin(rs.getDate("fecha_fin"));
+            membresia.setCosto(rs.getBigDecimal("Costo"));
+            membresia.setEstado(rs.getBoolean("estado"));
+            membresia.setTipo(rs.getString("Tipo"));
+            membresias.add(membresia);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return membresias;
+}
 }
 
 
