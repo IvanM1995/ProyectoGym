@@ -279,8 +279,9 @@ private SocioData socioData;
 
 public void buscarSocioPorDni(String dni) {
     if (dni.matches("\\d{8}")) {
-        Socio socio = socioData.buscarSocioPorDni(dni);
-        if (!socio.getDni().equals("0")) {
+        Socio socio = new Socio();
+        socio = socioData.buscarSocioPorDni(dni);
+        if (socio != null && !socio.getApellido().isEmpty()) {
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             modelo.setRowCount(0);
             modelo.addRow(new Object[]{socio.getId_socio(), socio.getDni(), socio.getNombre(), socio.getApellido(),

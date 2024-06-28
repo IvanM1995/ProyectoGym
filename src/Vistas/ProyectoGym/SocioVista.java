@@ -7,6 +7,7 @@ package Vistas.ProyectoGym;
 
 import AccesoDatos.ProyectoGym.SocioData;
 import Entidades.ProyectoGym.Socio;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -212,33 +213,71 @@ public class SocioVista extends javax.swing.JInternalFrame {
     private void textDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDniActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textDniActionPerformed
-
+    public void limpiar(){
+ 
+    textTelefono.setText("");
+    textNombre.setText("");
+    textApellido.setText("");
+    textEdad.setText("");
+    textCorreo.setText("");
+    textDni.setText("");
+ 
+ }
     private void GuardarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarSocioActionPerformed
-        SocioData socioData = new SocioData();
-    
-   
-    Socio socio = new Socio();
-    socio.setNombre(textNombre.getText());
-    socio.setApellido(textApellido.getText());
-    socio.setDni(textDni.getText());
-    socio.setEdad(Integer.parseInt(textEdad.getText()));
-    socio.setCorreo(textCorreo.getText());
-    socio.setTelefono(textTelefono.getText());
-    socio.setContador_asistencia(0); 
-    socio.setEstado(true); 
-    
-   
-    boolean resultado = socioData.guardarSocio(socio);
-    
-    if (resultado) {
-        
-        JOptionPane.showMessageDialog(this, "¡Inscripción del socio exitosamente!");
-    } else {
-        
-        JOptionPane.showMessageDialog(this, "Error al inscribir el socio.");
+                                                
+     SocioData socioData = new SocioData();
+        // Validación de los datos de entrada
+    String nombre = textNombre.getText();
+    String apellido = textApellido.getText();
+    String dni = textDni.getText();
+    String edadStr = textEdad.getText();
+    String correo = textCorreo.getText();
+    String telefono = textTelefono.getText();
+
+    // Validación de nombre y apellido (solo letras y espacios, no vacío)
+    if (!Pattern.matches("[a-zA-Z\\s]+", nombre) || nombre.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Nombre inválido.");
+        return;
     }
+
+    if (!Pattern.matches("[a-zA-Z\\s]+", apellido) || apellido.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Apellido inválido.");
+        return;
+    }
+
+    // Validación de DNI (solo números y longitud específica, por ejemplo 8 dígitos)
+    if (!Pattern.matches("\\d{8}", dni)) {
+        JOptionPane.showMessageDialog(this, "DNI inválido.");
+        return;
+    }
+
+    // Validación de edad (solo números y un rango razonable, por ejemplo 0 a 120)
+    int edad;
+    try {
+        edad = Integer.parseInt(edadStr);
+        if (edad < 0 || edad > 120) {
+            JOptionPane.showMessageDialog(this, "Edad inválida.");
+            return;
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Edad inválida.");
+        return;
+    }
+
+    // Validación de correo (formato de correo electrónico básico)
+    if (!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", correo)) {
+        JOptionPane.showMessageDialog(this, "Correo inválido.");
+        return;
+    }
+
+    // Validación de teléfono (solo números y longitud específica, por ejemplo 10 dígitos)
+    if (!Pattern.matches("\\d{10}", telefono)) {
+        JOptionPane.showMessageDialog(this, "Teléfono inválido.");
+        return;
+
     }//GEN-LAST:event_GuardarSocioActionPerformed
 
+    }
 class OnlyLettersFilter extends DocumentFilter {
     @Override
     public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
@@ -298,6 +337,9 @@ class AgeFilter extends DocumentFilter {
         }
     }
 }
+
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Apellido;

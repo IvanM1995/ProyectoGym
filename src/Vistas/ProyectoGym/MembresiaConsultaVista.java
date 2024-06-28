@@ -217,7 +217,7 @@ private Socio soc = new Socio();
 //        EliminarBoton.setEnabled(true);
         BotonCancelar.setEnabled(true);
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Ingrese un ID de Socio válido.");
+        JOptionPane.showMessageDialog(this, "Ingrese un Dni de Socio válido.");
         BotonRenovar.setEnabled(false); 
         BotonCancelar.setEnabled(false); 
 //        EliminarBoton.setEnabled(false);
@@ -317,31 +317,9 @@ private Socio soc = new Socio();
         mostrarMembresiasEnTabla(membresias);
     }
     
-    private void eliminarMembresiaSeleccionada() {
-        int filaSeleccionada = jTable1.getSelectedRow();
-        if (filaSeleccionada == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione una membresía para eliminar.");
-            return;
-        }
+    
 
-        int idMembresia = (int) jTable1.getValueAt(filaSeleccionada, 0);
-
-       
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea eliminar esta membresía?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-        if (confirmacion == JOptionPane.YES_OPTION) {
-           
-            eliminarMembresia(idMembresia);
-        }
-    }
-
-    private void eliminarMembresia(int idMembresia) {
-        
-        membresiaData.eliminarMembresia(idMembresia);
-
-      
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.removeRow(jTable1.getSelectedRow());
-    }
+    
     
     private void renovarMembresia(int idMembresia) {
         String dni = jTextField1.getText();;

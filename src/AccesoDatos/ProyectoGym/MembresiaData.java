@@ -177,7 +177,7 @@ public class MembresiaData {
      public List<Membresia> obtenerMembresiasPorDni(String dni) {
         Socio socio = socData.buscarSocioPorDni(dni);
         if (socio == null || socio.getDni().equals("0")) {
-            JOptionPane.showMessageDialog(null, "Actualizado con exito");
+            JOptionPane.showMessageDialog(null, "Socio sin membresia activa");
             return new ArrayList<>();
         }
         return obtenerMembresiasPorSocio2(socio.getId_socio());
