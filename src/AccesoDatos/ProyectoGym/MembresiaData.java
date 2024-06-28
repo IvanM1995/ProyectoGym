@@ -70,7 +70,7 @@ public class MembresiaData {
      
     public List<Membresia> obtenerMembresiasPorSocio(int idSocio) {
     List<Membresia> membresias = new ArrayList<>();
-    String sql = "SELECT * FROM Membresia WHERE id_socio = ? AND estado = true";
+    String sql = "SELECT * FROM Membresia WHERE id_socio = ?";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
         statement.setInt(1, idSocio);
         ResultSet rs = statement.executeQuery();
@@ -98,9 +98,10 @@ public class MembresiaData {
     String sql = "UPDATE membresia SET fecha_inicio = ?, fecha_fin = ?, estado = ? WHERE id_membresia = ?";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
         LocalDate hoy = LocalDate.now();
+        LocalDate nuevaFechaFin = hoy.plusMonths(1);
         statement.setDate(1, Date.valueOf(hoy));
-        statement.setDate(2, Date.valueOf(hoy.plusDays(30)));
-        statement.setBoolean(3, true);  // Reactivar si fue desactivada
+        statement.setDate(2, Date.valueOf(nuevaFechaFin));
+        statement.setBoolean(3, true);  
         statement.setInt(4, idMembresia);
         statement.executeUpdate();
     } catch (SQLException e) {
@@ -172,7 +173,17 @@ public class MembresiaData {
             JOptionPane.showMessageDialog(null, "Error al actualizar la membresía: " + e.getMessage());
         }
     }
+    
+     public List<Membresia> obtenerMembresiasPorDni(String dni) {
+        Socio socio = socData.buscarSocioPorDni(dni);
+        if (socio == null || socio.getDni().equals("0")) {
+            JOptionPane.showMessageDialog(null, "Actualizado con exito");
+            return new ArrayList<>();
+        }
+        return obtenerMembresiasPorSocio(socio.getId_socio());
+    }
 }
+
 
     
     

@@ -204,7 +204,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textDniActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((PlainDocument) textDni.getDocument()).setDocumentFilter(new OnlyNumbersFilter());"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((PlainDocument) textDni.getDocument()).setDocumentFilter(new OnlyNumbersFilter(8));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="textEdad">
@@ -216,7 +216,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textTelefono">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((PlainDocument) textTelefono.getDocument()).setDocumentFilter(new OnlyNumbersFilter());"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((PlainDocument) textTelefono.getDocument()).setDocumentFilter(new OnlyNumbersFilter(10));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="GuardarSocio">

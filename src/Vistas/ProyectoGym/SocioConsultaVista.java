@@ -57,7 +57,7 @@ private SocioData socioData;
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Socio Consultas");
 
-        jLabel2.setText("Buscar Socio por ID:");
+        jLabel2.setText("Buscar Socio por Dni:");
 
         BuscarID.setText("Buscar");
         BuscarID.addActionListener(new java.awt.event.ActionListener() {
@@ -136,32 +136,32 @@ private SocioData socioData;
                 .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(266, Short.MAX_VALUE)
                 .addComponent(ModificarBoton)
                 .addGap(80, 80, 80)
                 .addComponent(EliminarBoton)
                 .addGap(245, 245, 245))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BuscarID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BuscarID))
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addGap(230, 230, 230)
+                            .addComponent(jLabel3))
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addGap(82, 82, 82)
+                            .addComponent(limpiarBoton))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(ListarBoton)
                 .addGap(92, 92, 92))
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(jLabel3))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(limpiarBoton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,13 +169,14 @@ private SocioData socioData;
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(BuscarID)
-                    .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ListarBoton)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ListarBoton)
+                        .addComponent(jLabel4))
+                    .addComponent(BuscarID, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(1, 1, 1)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -183,7 +184,7 @@ private SocioData socioData;
                     .addComponent(EliminarBoton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(limpiarBoton)
                 .addContainerGap())
         );
@@ -251,13 +252,13 @@ private SocioData socioData;
 
     private void BuscarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarIDActionPerformed
         try {
-        int id = Integer.parseInt(textId.getText());
-        buscarSocioPorId(id);
+        String dni = textId.getText();
+        buscarSocioPorDni(dni);
         
         ModificarBoton.setEnabled(true);
         EliminarBoton.setEnabled(true);
     } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_BuscarIDActionPerformed
 
@@ -275,17 +276,22 @@ private SocioData socioData;
     }//GEN-LAST:event_limpiarBotonActionPerformed
 
 
-     public void buscarSocioPorId(int id) {
-        Socio socio = socioData.buscarSocioPorId(id);
-        if (socio.getId_socio() != 0) {
+
+public void buscarSocioPorDni(String dni) {
+    if (dni.matches("\\d{8}")) {
+        Socio socio = socioData.buscarSocioPorDni(dni);
+        if (!socio.getDni().equals("0")) {
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            modelo.setRowCount(0); 
+            modelo.setRowCount(0);
             modelo.addRow(new Object[]{socio.getId_socio(), socio.getDni(), socio.getNombre(), socio.getApellido(),
                 socio.getEdad(), socio.getCorreo(), socio.getTelefono(), socio.getContador_asistencia()});
         } else {
             JOptionPane.showMessageDialog(null, "El Socio no existe o fue dado de baja...");
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "El DNI debe contener exactamente 8 caracteres numéricos.");
     }
+}
 
     public void listarSocios() {
         List<Socio> socios = socioData.listarSocios();

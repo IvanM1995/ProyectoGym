@@ -180,6 +180,7 @@ public class SocioData {
                 socio.setContador_asistencia(rs.getInt("cont_asistencia"));
             }else{
                 JOptionPane.showMessageDialog(null, "El Socio no existe o fue dado de baja...");
+                socio = null;
             }
             ps.close();
         } catch (SQLException ex) {

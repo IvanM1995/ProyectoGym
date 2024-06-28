@@ -64,7 +64,7 @@ private Socio soc = new Socio();
         });
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Buscar por ID de Socio:");
+        jLabel1.setText("Buscar por Dni de Socio:");
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -116,7 +116,7 @@ private Socio soc = new Socio();
         });
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Ingrese primero Busqueda Id de Socio para realizar alguna acción");
+        jLabel5.setText("Ingrese primero Busqueda de Socio para realizar alguna acción abajo");
 
         jDesktopPane1.setLayer(BotonSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -146,11 +146,10 @@ private Socio soc = new Socio();
                                 .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addGap(29, 29, 29)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(BotonSocio)
-                                    .addGap(76, 76, 76))
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(BotonSocio))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton3)
@@ -159,17 +158,16 @@ private Socio soc = new Socio();
                                         .addGap(18, 18, 18)
                                         .addComponent(BotonListar)))
                                 .addGap(139, 139, 139)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(BotonRenovar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(45, 45, 45)
                                 .addComponent(BotonCancelar)
-                                .addGap(53, 53, 53))))))
+                                .addGap(33, 33, 33))))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,8 +211,8 @@ private Socio soc = new Socio();
 //////
     private void BotonSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSocioActionPerformed
  try {
-        int idSocio = Integer.parseInt(jTextField1.getText());
-        buscarMembresiasPorIdSocio(idSocio);
+        String dni = jTextField1.getText();
+        buscarMembresiasPorDni(dni);
         BotonRenovar.setEnabled(true); 
 //        EliminarBoton.setEnabled(true);
         BotonCancelar.setEnabled(true);
@@ -248,20 +246,28 @@ private Socio soc = new Socio();
     }//GEN-LAST:event_BotonCancelarActionPerformed
 
     private void BotonRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRenovarActionPerformed
-    int filaSeleccionada = jTable1.getSelectedRow();
+   int filaSeleccionada = jTable1.getSelectedRow();
     if (filaSeleccionada != -1) {
         int idMembresia = (int) jTable1.getValueAt(filaSeleccionada, 0); 
-        int idSocio = Integer.parseInt(jTextField1.getText());
-          int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea renovar esta membresía?", "Confirmar renovación", JOptionPane.YES_NO_OPTION);
-    if (confirmacion == JOptionPane.YES_OPTION) {
-        renovarMembresia(idMembresia);
-        soc = socData.buscarSocioPorId(idSocio);
-        soc.setContador_asistencia(soc.getContador_asistencia()+(int) jTable1.getValueAt(filaSeleccionada,6));
-        socData.modificarSocio(soc);
+        String dni = jTextField1.getText(); // Obtener el DNI del campo de texto
+        Socio socio = socData.buscarSocioPorDni(dni);
         
+        if (socio != null) {
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea renovar esta membresía?", "Confirmar renovación", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                renovarMembresia(idMembresia);
+               
+                socio.setContador_asistencia(socio.getContador_asistencia() + (int) jTable1.getValueAt(filaSeleccionada, 6)); 
+                socData.modificarSocio(socio);
+                
+               
+                 buscarMembresiasPorDni(dni);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "El Socio no existe o fue dado de baja...");
+        }
     } else {
         JOptionPane.showMessageDialog(this, "Seleccione una membresía para renovar.");
-    }
     }
     }//GEN-LAST:event_BotonRenovarActionPerformed
 
@@ -285,7 +291,7 @@ private Socio soc = new Socio();
 
     private void mostrarMembresiasEnTabla(List<Membresia> membresias) {
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    model.setRowCount(0); // Limpiamos la tabla antes de agregar nuevos datos
+    model.setRowCount(0); 
 
     for (Membresia membresia : membresias) {
           
@@ -306,8 +312,8 @@ private Socio soc = new Socio();
     
     
    
-    private void buscarMembresiasPorIdSocio(int idSocio) {
-        List<Membresia> membresias = membresiaData.obtenerMembresiasPorSocio(idSocio);
+    private void buscarMembresiasPorDni(String dni) {
+        List<Membresia> membresias = membresiaData.obtenerMembresiasPorDni(dni);
         mostrarMembresiasEnTabla(membresias);
     }
     
@@ -338,15 +344,15 @@ private Socio soc = new Socio();
     }
     
     private void renovarMembresia(int idMembresia) {
-        int idSocio = Integer.parseInt(jTextField1.getText());
+        String dni = jTextField1.getText();;
     membresiaData.renovarMembresia(idMembresia);
-    buscarMembresiasPorIdSocio(idSocio);
+    buscarMembresiasPorDni(dni);
 }
     
 private void cancelarMembresia(int idMembresia) {
-    int idSocio = Integer.parseInt(jTextField1.getText());
+   String dni = jTextField1.getText();;
     membresiaData.cancelarMembresia(idMembresia);
-   buscarMembresiasPorIdSocio(idSocio);
+buscarMembresiasPorDni(dni);
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

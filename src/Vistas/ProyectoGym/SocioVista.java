@@ -187,9 +187,9 @@ public class SocioVista extends javax.swing.JInternalFrame {
 
         ((PlainDocument) textNombre.getDocument()).setDocumentFilter(new OnlyLettersFilter());
         ((PlainDocument) textApellido.getDocument()).setDocumentFilter(new OnlyLettersFilter());
-        ((PlainDocument) textDni.getDocument()).setDocumentFilter(new OnlyNumbersFilter());
+        ((PlainDocument) textDni.getDocument()).setDocumentFilter(new OnlyNumbersFilter(8));
         ((PlainDocument) textEdad.getDocument()).setDocumentFilter(new AgeFilter());
-        ((PlainDocument) textTelefono.getDocument()).setDocumentFilter(new OnlyNumbersFilter());
+        ((PlainDocument) textTelefono.getDocument()).setDocumentFilter(new OnlyNumbersFilter(10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,16 +256,26 @@ class OnlyLettersFilter extends DocumentFilter {
 }
 
 class OnlyNumbersFilter extends DocumentFilter {
+    private int maxLength;
+
+    public OnlyNumbersFilter(int maxLength) {
+        this.maxLength = maxLength;
+    }
+
     @Override
     public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-        if (string.matches("\\d+")) {
+        String text = fb.getDocument().getText(0, fb.getDocument().getLength());
+        text += string;
+        if (text.matches("\\d+") && text.length() <= maxLength) {
             super.insertString(fb, offset, string, attr);
         }
     }
 
     @Override
     public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-        if (text.matches("\\d+")) {
+        String existingText = fb.getDocument().getText(0, fb.getDocument().getLength());
+        String newText = existingText.substring(0, offset) + text + existingText.substring(offset + length);
+        if (newText.matches("\\d+") && newText.length() <= maxLength) {
             super.replace(fb, offset, length, text, attrs);
         }
     }
