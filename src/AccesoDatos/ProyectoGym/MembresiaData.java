@@ -209,6 +209,30 @@ public class MembresiaData {
     }
     return membresias;
 }
+      
+      public void menosPases(int idSocio) {
+        
+        String sql = "UPDATE membresia SET CantidadPases = CantidadPases - 1 WHERE ID_Socio = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            
+            ps.setInt(1, idSocio);
+            
+            int rows = ps.executeUpdate();
+            
+            if (rows > 0) {
+                JOptionPane.showMessageDialog(null, "Se ha restado un pase correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró al socio con ID " + idSocio);
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al restar un pase: " + ex.getMessage());
+        }
+    }
+    
 }
 
 

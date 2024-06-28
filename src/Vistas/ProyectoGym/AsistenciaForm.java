@@ -32,6 +32,7 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
         private ClaseData claData;
         private MembresiaData membresia;
         private Socio soc;
+        private Membresia mem;
  
     
     
@@ -46,6 +47,7 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
          soc= new Socio();
          Clase clase = null;
          llenarComboBoxConClases() ;
+         mem = new Membresia();
        
          
          membresia = new MembresiaData();
@@ -126,10 +128,15 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
               
             Asistencia c = new Asistencia (idSocio, idClase, fecha, horario ,true);
             int in = jcMembresia.getSelectedIndex();
+            
             Membresia m =jcMembresia.getItemAt(in);
+            if (m == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione una membresía válida.");
+            return;
+        }
            
             
-            if( claData.ConsultaCapacidad(idClase)&& idSocio.getContador_asistencia()>0 && fecha.before(m.getFecha_fin()) && jdFechaAsistencia.getDate()!= null)
+            if( claData.ConsultaCapacidad(idClase)&& idSocio.getContador_asistencia()>0 && m.getCant_pases() > 0 && fecha.before(m.getFecha_fin()) && jdFechaAsistencia.getDate()!= null)
             {
             
             asiData.guardarAsistencia(c);
@@ -138,6 +145,8 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
             soc = socData.buscarSocioPorId(idSocio.getId_socio());
             soc.setContador_asistencia(soc.getContador_asistencia()-1);
             socData.modificarSocio(soc);
+
+             membresia.menosPases(idSocio.getId_socio());
             
             }
             else
@@ -153,6 +162,10 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
                              JOptionPane.showMessageDialog(this, "no puede inscribirse socio sin pases" );
                         
                         }
+                
+                     else if (m.getCant_pases() == 0) {
+    JOptionPane.showMessageDialog(this, "No puede inscribirse, el socio no tiene pases en su membresía.");
+                }
 
                             else if(jdFechaAsistencia.getDate()== null){
 
@@ -325,9 +338,11 @@ public class AsistenciaForm extends javax.swing.JInternalFrame {
         String dni = jtSocioDni.getText();
         soc = socData.buscarSocioPorDni(dni);
        
-        if(soc.getDni()!= null){
-       llenarComboBoxConMembresias(soc);
-        }
+        if (soc != null && soc.getDni() != null) {
+        llenarComboBoxConMembresias(soc);
+    } else {
+        JOptionPane.showMessageDialog(this, "Socio no encontrado o inactivo");
+    }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
 
